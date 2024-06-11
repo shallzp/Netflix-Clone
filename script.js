@@ -5,19 +5,16 @@ const yt_api_path = (query) => `https://www.googleapis.com/youtube/v3/search?par
 function initial_setup() {
     $(".ans").hide();
 
-    $(".sign-up").hide();
-    $(".get-started").hide();
-    $(".after-sign-in").hide();
-    
-    // $("#email").on("input", getStarted);
+    scrollToSection($("#front-sign-in"));
+
+    $(".my-list").hide();
+    $(".language-filter").hide();
 }
 
 function init() {
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
-    setupButton();
-    $(".my-list").hide();
-    $(".language-filter").hide();
+    // setupButton();
 }
 
 $(document).ready(() => {
@@ -39,16 +36,15 @@ $(document).ready(() => {
 
 // Front Page
 function signUpBtn() {
-    $(".front-sign-in").hide();
-    $(".sign-up").show()
+    scrollToSection($("#sign-up"));
 }
 
 function getStarted() {
     var emailValue = $("#email").val().trim();
 
     if (emailValue!== "") {
-        $(".front-sign-in").hide();
-        $(".get-started").show();
+        $("#front-sign-in").hide();
+        $("#get-started").show();
     } 
     else {
         $("#email").focus();
@@ -64,41 +60,37 @@ function toggleDiv(divCl) {
 
 
 
-
 //Sign-in Page
 function validateSignUp() {
     var isValid = true;
 
-    // Validate email or phone number
     var enumVal = $("#email-number").val();
     var isValidEmail = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(enumVal);
     // var isValidPhone = /^\d{10}$/.test(enumVal);
     if (!isValidEmail) {
-        $("#email-error").show();
+        $(".email-error").show();
         isValid = false;
     }
 
-    // Validate password
     var password = $('#password').val();
     if (password.length < 4 || password.length > 60) {
-        $("#password-error").show();
+        $(".pass-error").show();
         isValid = false;
     }
 
     if(isValid) {
         var user = user_data.users[0];
         if ((enumVal === user.email || enumVal === user.username) && password === user.password) {
-            $(".before-sign-in").hide();
-            $(".sign-up").hide();
-            $(".after-sign-in").show();
+            scrollToSection($("#after-sign-in"));
         } 
         else {
             $(".invalid.credential").show();
             isValid = false;
         }
     }
-} 
 
+    return isValid;
+} 
 
 
 
@@ -189,9 +181,9 @@ function buildMovieSection(dataList, category_name) {
                 </ul>
                 <ul class="second">
                     <li class="access-item"><p class="green">93% Match</p></li>
-                    <li class="access-item"><p class="box">13+</p></li>
+                    <li class="access-item"><p class="sm-box">13+</p></li>
                 <li class="access-item"><p>1 Season</p></li>
-                <li class="access-item"><span class="box hd">HD</span></li>
+                <li class="access-item"><span class="sm-box hd">HD</span></li>
                 </ul>
                 <ul class="third">
                     <li class="access-item">${genreList}</li>
@@ -242,7 +234,7 @@ function Hover() {
     $(".movie-item").hover(function() {
         $(this).find(".access").removeClass("on-hover");
         //const movieId = $(this).attr("id");
-        setupButton();
+        // setupButton();
     }, noHover);
 }
   
@@ -379,8 +371,6 @@ $(document).ready(function() {
         var movieItem = $(this).closest('.movie-item');
         var myListContainerRow = $('.my-list.container .my-row');
 
-
-
         // Check if the movie is already in the my-list
         if (myListContainerRow.find(movieItem).length > 0) {
             // Remove from my-list
@@ -394,3 +384,26 @@ $(document).ready(function() {
     });
 });
 
+
+function scrollToSection(section) {
+    if (section.length) {
+        $('body > div').hide();
+        section.show();
+        $('html, body').animate({
+            scrollTop: section.offset().top
+        }, 500);
+
+        window.location.hash = section.attr('id');
+    }
+}
+
+// Scroll to the section when the hash changes
+// Not opening because of credential login
+
+// $(window).on('hashchange', function() {
+//     const hash = window.location.hash;
+//     if (hash) {
+//         const section = $(hash);
+//         scrollToSection(section);
+//     }
+// });

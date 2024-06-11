@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="front-sign-in">
+    <div id="front-sign-in">
         <div class="main">
             <div class="front-nav">
                 <div class="navbar-logo">
@@ -188,7 +188,7 @@
     </div>
 
 
-    <div class="get-started">
+    <div id="get-started">
         <div class="front-nav">
             <div class="navbar-logo">
                 <img src="./images/netflix_logo.png" class="front-netflix-logo">
@@ -240,7 +240,7 @@
     </div>
     
     
-    <div class="sign-up">
+    <div id="sign-up">
         <div class="sign-main">
             <div class="main">
                 <div class="front-nav">
@@ -249,18 +249,18 @@
                     </div>
                 </div>
                 <div class="box"></div>
-                <form class="sign-up-form" onsubmit="validateSignUp()">
+                <form class="sign-up-form" onsubmit="return validateSignUp()">
                     <h1>Sign In</h1>
-                    <p class="invalid credential" style="display: none;">Invalid email or password.</p>
+                    <p class="invalid credential" style="display: none;">Invalid email or password!!!</p>
                     <div class="email-number">
                         <label>Email or mobile number</label>
                         <input id="email-number" class="transparent btn" type="text">
-                        <p class="invalid" style="display: none;">Please enter a valid email address or phone number.</p>
+                        <p class="invalid email-error" style="display: none;">Please enter a valid email address or phone number.</p>
                     </div>
                     <div class="password">
                         <label>Password</label>
                         <input id="password" class="transparent btn" type="password">
-                        <p class="invalid" style="display: none;">Your password must contain between 4 and 60 characters.</p>
+                        <p class="invalid pass-error" style="display: none;">Your password must contain between 4 and 60 characters.</p>
                     </div>
     
                     <div class="sign-btns">
@@ -312,7 +312,7 @@
     </div>
 
 
-    <div class="after-sign-in">
+    <div id="after-sign-in">
         <div id="header" class="">
             <nav class="navbar container">
                 <div class="navbar-logo">
@@ -385,9 +385,9 @@
                                     </ul>
                                     <ul class="second">
                                         <li class="access-item"><p class="green">93% Match</p></li>
-                                        <li class="access-item"><p class="box">13+</p></li>
+                                        <li class="access-item"><p class="sm-box">13+</p></li>
                                         <li class="access-item"><p>1 Season</p></li>
-                                        <li class="access-item"><span class="box hd">HD</span></li>
+                                        <li class="access-item"><span class="sm-box hd">HD</span></li>
                                     </ul>
                                     <ul class="third">
                                         <li class="access-item">genre</li>
@@ -406,7 +406,7 @@
         </div>
     
         <div class="my-list container">
-            <h2 class="movie-section-heading">My List</h2>
+            <h2 class="heading">My List</h2>
             <div class="my-row">
             </div>
         </div>
