@@ -723,14 +723,26 @@ img.explore-nudge {
   display: inline-block;
 }
 
+.movie-row-container {
+  display: grid;
+  grid-template-columns: 0.005fr 0.99fr 0.005fr;
+}
+
+.scroll-left, .scroll-right {
+  background-color: transparent;
+  color: white;
+  border: none;
+  line-height: 100%;
+}
+
 .movie-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  /* overflow-x: auto !important; */
+  overflow-x: auto;
   overflow-y: hidden;
-  overflow: visible;
+  transition: overflow 0.3s ease;
 }
 
 .movie-item {

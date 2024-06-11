@@ -29,6 +29,17 @@ $(document).ready(() => {
             $("#header").removeClass("black-bg");
         }
     });
+
+
+    $('.scroll-left').click(function() {
+        var movieRow = $(this).siblings('.movie-row');
+        movieRow.scrollLeft(movieRow.scrollLeft() - 100);
+    });
+    
+    $('.scroll-right').click(function() {
+        var movieRow = $(this).siblings('.movie-row');
+        movieRow.scrollLeft(movieRow.scrollLeft() + 100);
+    });
 }); 
 
 
@@ -167,7 +178,7 @@ function buildMovieSection(dataList, category_name) {
         const genreList = filteredGenres.join(', ');
 
         return `
-        <div class="movie-item" onmouseover="searchMovieTrailer('${item.title}', 'yt${item.id}') id="${item.id}">
+        <div class="movie-item" onmouseover="searchMovieTrailer('${item.title}', 'yt${item.id}')" id="${item.id}">
             <img class="movie-item-img" src="${item.backdrop_path}" alt="${item.title}">
             <div class="yt-iframe" id="yt${item.id}"></div>
             
@@ -196,8 +207,12 @@ function buildMovieSection(dataList, category_name) {
     const movieSectionHTML = `
     <div class="movie-section">
         <h2 class="movie-section-heading">${category_name} <span class="explore-nudge">Explore All</span></h2>
-        <div class="movie-row">
-            ${movieListHTML}
+        <div class="movie-row-container">
+            <button class="scroll-left">&lt;</button>
+            <div class="movie-row">
+                ${movieListHTML}
+            </div>
+            <button class="scroll-right">&gt;</button>
         </div>
     </div>
     `;
@@ -227,12 +242,14 @@ function searchMovieTrailer(movieName, iframeId) {
 //For transitiom of movie-item
 function noHover() {
     $(this).find(".access").addClass("on-hover");
+    $(this).closest('.movie-row').css('overflow', 'auto');
 }
 
 function Hover() {
     $(".access").addClass("on-hover");
     $(".movie-item").hover(function() {
         $(this).find(".access").removeClass("on-hover");
+        $(this).closest('.movie-row').css('overflow', 'visible');
         //const movieId = $(this).attr("id");
         // setupButton();
     }, noHover);
@@ -301,6 +318,8 @@ function filterContent(category) {
         $(".my-list").hide();
         $(".language-filter").show();
     }
+
+    window.location.hash = "after-sign-in" + '?' + category ;
 }
 
 function clearSections() {
@@ -349,8 +368,8 @@ function clearSections() {
 // }
 
 
-// // My list
-// myList = {results : []};
+// My list
+myList = {results : []};
 
 // function addToList(movieItem) {
 //     let container = $(".my-list.container");
@@ -369,36 +388,51 @@ $(document).ready(function() {
     $('.access-item[cat="add-to-list"] button').on('click', function(event) {
         event.preventDefault();
         var movieItem = $(this).closest('.movie-item');
+        var movieId = movieItem.attr('id');
         var myListContainerRow = $('.my-list.container .my-row');
 
+        // Find the movie details from tmdb_examples based on the id
+        var movieDetails;
+        for (var i = 0; i < tmdb_examples.results.length; i++) {
+            if (tmdb_examples.results[i].id === movieId) {
+                movieDetails = tmdb_examples.results[i];
+                break;
+            }
+        }
+
         // Check if the movie is already in the my-list
-        if (myListContainerRow.find(movieItem).length > 0) {
+        var existingMovie = myListContainerRow.find('.movie-item[id="' + movieId + '"]');
+        if (existingMovie.length > 0) {
             // Remove from my-list
-            myListContainerRow.remove(movieItem);
+            existingMovie.remove();
             $(this).html('<img src="./images/icons/add.png">'); // Change button to add icon
         } else {
             // Add to my-list
-            myListContainerRow.append(movieItem.clone()); // Clone the movie item to avoid direct manipulation
+            mylist.results.push(movieDetails); // Add movie details to mylist
+            var newMovieItem = movieItem.clone(); // Clone the movie item
+            newMovieItem.attr('id', movieId); // Set id attribute
+            myListContainerRow.append(newMovieItem); // Append to my-list
             $(this).html('<img src="./images/icons/tick.png">'); // Change button to checkmark icon
         }
     });
 });
 
 
-function scrollToSection(section) {
-    if (section.length) {
-        $('body > div').hide();
-        section.show();
-        $('html, body').animate({
-            scrollTop: section.offset().top
-        }, 500);
 
-        window.location.hash = section.attr('id');
-    }
-}
+// function scrollToSection(section) {
+//     if (section.length) {
+//         $('body > div').hide();
+//         section.show();
+//         $('html, body').animate({
+//             scrollTop: section.offset().top
+//         }, 500);
 
-// Scroll to the section when the hash changes
-// Not opening because of credential login
+//         window.location.hash = section.attr('id');
+//     }
+// }
+
+// // Scroll to the section when the hash changes
+// // Not opening because of credential login
 
 // $(window).on('hashchange', function() {
 //     const hash = window.location.hash;
@@ -407,3 +441,36 @@ function scrollToSection(section) {
 //         scrollToSection(section);
 //     }
 // });
+
+
+function scrollToSection(section, dataCategory = '') {
+    if (section.length) {
+        $('body > div').hide();
+        section.show();
+        $('html, body').animate({
+            scrollTop: section.offset().top
+        }, 500);
+        
+        const hash = section.attr('id') + '?' + dataCategory;
+        window.location.hash = hash;
+    }
+}
+
+// Scroll to the section when the hash changes
+// Not opening because of credential login
+
+$(window).on('hashchange', function() {
+    const { section, dataCategory } = getSectionFromHash();
+    if (section.length) {
+        scrollToSection(section, dataCategory);
+    }
+});
+
+function getSectionFromHash() {
+    const hash = window.location.hash;
+    if (!hash) return { section: $(), dataCategory: '' };
+
+    const [sectionId, dataCategory] = hash.slice(1).split('?');
+    const section = $('#' + sectionId);
+    return { section, dataCategory };
+}
