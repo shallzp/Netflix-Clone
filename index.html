@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Netflix India – Watch TV Shows Online, Watch Movies Online</title>
+</head>
+
+<link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+<link rel="stylesheet" href="./style.css">
+
+<body>
+
+    <div class="front-sign-in">
+        <div class="main">
+            <div class="front-nav">
+                <div class="navbar-logo">
+                    <img src="./images/netflix_logo.png" class="front-netflix-logo">
+                </div>
+                <div class="front-btns">
+                    <button class="language transparent btn">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16" role="img" data-icon="LanguagesSmall" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7668 5.33333L10.5038 5.99715L9.33974 8.9355L8.76866 10.377L7.33333 14H9.10751L9.83505 12.0326H13.4217L14.162 14H16L12.5665 5.33333H10.8278H10.7668ZM10.6186 9.93479L10.3839 10.5632H11.1036H12.8856L11.6348 7.2136L10.6186 9.93479ZM9.52722 4.84224C9.55393 4.77481 9.58574 4.71045 9.62211 4.64954H6.41909V2H4.926V4.64954H0.540802V5.99715H4.31466C3.35062 7.79015 1.75173 9.51463 0 10.4283C0.329184 10.7138 0.811203 11.2391 1.04633 11.5931C2.55118 10.6795 3.90318 9.22912 4.926 7.57316V12.6667H6.41909V7.51606C6.81951 8.15256 7.26748 8.76169 7.7521 9.32292L8.31996 7.88955C7.80191 7.29052 7.34631 6.64699 6.9834 5.99715H9.06968L9.52722 4.84224Z" fill="currentColor">
+                                </path>
+                            </svg> 
+                            English 
+                            <img src="./images/icons/dropdown.png">    
+                        </span>
+                    </button>
+                    <button class="sign-in red btn" onclick="signUpBtn()"><span>Sign In</span></button>
+                </div>
+            </div>
+            <div class="box"></div>
+            <div class="hero">
+                <h1>Unlimited movies, TV shows and more</h1>
+                <h2>Watch anywhere. Cancel anytime.</h2>
+                <h3>Ready to watch? Enter your email to create or restart your membership.</h3>
+                <form class="email-form" onsubmit="getStarted()">
+                    <div class="email">
+                        <label>Email address</label>
+                        <input class="transparent btn" id="email" type="email">
+                    </div>
+                    <button class="red btn" type="submit"><span>Get Started <img src="./images/icons/next-white.png"></span></button>
+                </form>
+            </div>
+            <div class="line"></div>
+        </div>
+
+        <section class="tv">
+            <div class="description">
+                <h1>Enjoy on your TV</h1>
+                <h2>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</h2>
+            </div>
+            <div class="tv-img">
+                <img src="./images/front-tv.png">
+                <video src="./videos/front-tv-video.m4v" muted autoplay loop></video>
+            </div>
+        </section>
+
+        <div class="line"></div>
+
+        <section class="mobile">
+            <div class="mobile-img">
+                <img src="./images/front-mobile.jpg">
+            </div>
+            <div class="description">
+                <h1>Download your shows to watch offline</h1>
+                <h2>Save your favourites easily and always have something to watch.</h2>
+            </div>
+        </section>
+
+        <div class="line"></div>
+
+        <section class="devices">
+            <div class="description">
+                <h1>Watch everywhere</h1>
+                <h2>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</h2>
+            </div>
+            <div class="devices-img">
+                <img src="./images/front-devices.png">
+                <video src="./videos/front-devices-video.m4v" muted autoplay loop></video>
+            </div>
+        </section>
+
+        <div class="line"></div>
+
+        <section class="kids">
+            <div class="kids-img">
+                <img src="./images/front-kids.png">
+            </div>
+            <div class="description">
+                <h1>Download your shows to watch offline</h1>
+                <h2>Send children on adventures with their favourite characters in a space made just for them—free with your membership.</h2>
+            </div>
+        </section>
+
+        <div class="line"></div>  
+
+        <section class="faq">
+            <h1>Frequently Asked Questions</h1>
+            <div class="ques-btns">
+                <button onclick="toggleDiv('a-1')"><span class="ques">What is Netflix?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-1">
+                    <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries and more – on thousands of internet-connected devices.</p>
+                    <p>You can watch as much as you want, whenever you want, without a single ad – all for one low monthly price. There's always something new to discover, and new TV shows and movies are added every week!</p>
+                </div>
+
+                <button onclick="toggleDiv('a-2')"><span class="ques">How much does Netflix cost?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-2">
+                    <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts.</p>
+                </div>
+
+                <button onclick="toggleDiv('a-3')"><span class="ques">Where can I watch?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-3">
+                    <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles.</p>
+                    <p>You can also download your favourite shows with the iOS or Android app. Use downloads to watch while you're on the go and without an internet connection. Take Netflix with you anywhere.</p>
+                </div>
+
+                <button onclick="toggleDiv('a-4')"><span class="ques">How do I cancel?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-4">
+                    <p>Netflix is flexible. There are no annoying contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime.</p>
+                </div>
+
+                <button onclick="toggleDiv('a-5')"><span class="ques">What can I watch on Netflix?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-5">
+                    <p>Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.</p>
+                </div>
+
+                <button onclick="toggleDiv('a-6')"><span class="ques">Is Netflix good for kids?</span> <span class="plus">&plus;</span> <span class="mul" style="display: none;">&times;</span></button>
+                <div class="ans a-6">
+                    <p>Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want.</p>
+                    <p>Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.</p>
+                </div>
+            </div>
+            <div class="hero">
+                <h3>Ready to watch? Enter your email to create or restart your membership.</h3>
+                <form class="email-form" onsubmit="getStarted()">
+                    <div class="email">
+                        <label>Email address</label>
+                        <input class="transparent btn" id="email" type="email">
+                    </div>
+                    <button class="red btn" type="submit"><span>Get Started <img src="./images/icons/next-white.png"></span></button>
+                </form>
+            </div>
+        </section>
+
+        <div class="line"></div>
+
+        <div class="footer">
+            <p>Questions? Call 000-800-919-1694</p>
+            <div class="flex-col">
+                <div class="c-1">
+                    <a href="">FAQ</a>
+                    <a href="">Investor Relations</a>
+                    <a href="">Privacy</a>
+                    <a href="">Speed Test</a>
+                    <button class="language transparent btn">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16" role="img" data-icon="LanguagesSmall" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7668 5.33333L10.5038 5.99715L9.33974 8.9355L8.76866 10.377L7.33333 14H9.10751L9.83505 12.0326H13.4217L14.162 14H16L12.5665 5.33333H10.8278H10.7668ZM10.6186 9.93479L10.3839 10.5632H11.1036H12.8856L11.6348 7.2136L10.6186 9.93479ZM9.52722 4.84224C9.55393 4.77481 9.58574 4.71045 9.62211 4.64954H6.41909V2H4.926V4.64954H0.540802V5.99715H4.31466C3.35062 7.79015 1.75173 9.51463 0 10.4283C0.329184 10.7138 0.811203 11.2391 1.04633 11.5931C2.55118 10.6795 3.90318 9.22912 4.926 7.57316V12.6667H6.41909V7.51606C6.81951 8.15256 7.26748 8.76169 7.7521 9.32292L8.31996 7.88955C7.80191 7.29052 7.34631 6.64699 6.9834 5.99715H9.06968L9.52722 4.84224Z" fill="currentColor">
+                                </path>
+                            </svg> 
+                            English 
+                            <img src="./images/icons/dropdown.png">    
+                        </span>
+                    </button>
+                    <p>Netflix India</p>
+                </div>
+                <div class="c-2">
+                    <a href="">Help Centre</a>
+                    <a href="">Jobs</a>
+                    <a href="">Cookie Preferences</a>
+                    <a href="">Legal Notices</a>
+                </div>
+                <div class="c-3">
+                    <a href="">Account</a>
+                    <a href="">Ways to Watch</a>
+                    <a href="">Corporate Information</a>
+                    <a href="">Only on Netflix</a>
+                </div>
+                <div class="c-4">
+                    <a href="">Media Centre</a>
+                    <a href="">Terms of Use</a>
+                    <a href="">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="get-started">
+        <div class="front-nav">
+            <div class="navbar-logo">
+                <img src="./images/netflix_logo.png" class="front-netflix-logo">
+            </div>
+            <button onclick="signUpBtn()"><span>Sign In</span></button>
+        </div>
+        <div class="divider"></div>
+        <div class="setup">
+            <div class="steps">
+                <img src="./images/step-1.png">
+                <p class="step-no">STEP 1 OF 4</p>
+                <h2>Finsh setting up your account</h2>
+                <p class="step-text">Netflix is personalised for you.</p>
+                <p class="step-text">Create a password to watch on any device at any time.</p>
+                <button class="red btn"><span>Next</span></button>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="setup-footer">
+            <p>Questions? Call 000-800-919-1694</p>
+            <div class="flex-col">
+                <div class="c-1">
+                    <a href="">FAQ</a>
+                    <a href="">Privacy</a>
+                    <button class="language transparent btn">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16" role="img" data-icon="LanguagesSmall" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7668 5.33333L10.5038 5.99715L9.33974 8.9355L8.76866 10.377L7.33333 14H9.10751L9.83505 12.0326H13.4217L14.162 14H16L12.5665 5.33333H10.8278H10.7668ZM10.6186 9.93479L10.3839 10.5632H11.1036H12.8856L11.6348 7.2136L10.6186 9.93479ZM9.52722 4.84224C9.55393 4.77481 9.58574 4.71045 9.62211 4.64954H6.41909V2H4.926V4.64954H0.540802V5.99715H4.31466C3.35062 7.79015 1.75173 9.51463 0 10.4283C0.329184 10.7138 0.811203 11.2391 1.04633 11.5931C2.55118 10.6795 3.90318 9.22912 4.926 7.57316V12.6667H6.41909V7.51606C6.81951 8.15256 7.26748 8.76169 7.7521 9.32292L8.31996 7.88955C7.80191 7.29052 7.34631 6.64699 6.9834 5.99715H9.06968L9.52722 4.84224Z" fill="currentColor">
+                                </path>
+                            </svg> 
+                            English 
+                            <img src="./images/icons/dropdown.png">    
+                        </span>
+                    </button>
+                </div>
+                <div class="c-2">
+                    <a href="">Help Centre</a>
+                    <a href="">Cookie Preferences</a>
+                </div>
+                <div class="c-3">
+                    <a href="">Netflix Shop</a>
+                    <a href="">Corporate Information</a>
+                </div>
+                <div class="c-4">
+                    <a href="">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="sign-up">
+        <div class="sign-main">
+            <div class="main">
+                <div class="front-nav">
+                    <div class="navbar-logo">
+                        <img src="./images/netflix_logo.png" class="front-netflix-logo">
+                    </div>
+                </div>
+                <div class="box"></div>
+                <form class="sign-up-form" onsubmit="validateSignUp()">
+                    <h1>Sign In</h1>
+                    <p class="invalid credential" style="display: none;">Invalid email or password.</p>
+                    <div class="email-number">
+                        <label>Email or mobile number</label>
+                        <input id="email-number" class="transparent btn" type="text">
+                        <p class="invalid" style="display: none;">Please enter a valid email address or phone number.</p>
+                    </div>
+                    <div class="password">
+                        <label>Password</label>
+                        <input id="password" class="transparent btn" type="password">
+                        <p class="invalid" style="display: none;">Your password must contain between 4 and 60 characters.</p>
+                    </div>
+    
+                    <div class="sign-btns">
+                        <button class="red btn" type="submit"><span>Sign In</span></button>
+                        <center><p class="grey-text">OR</p></center>
+                        <button class="grey btn"><span>Use a sign-in code</span></button>
+                    </div>
+    
+                    <center><p><a href="#" class="forgot-pass">Forgot password?</a></p></center>
+    
+                    <p> <input type="checkbox" id="remember-me"> Remember me</p>
+    
+                    <p class="grey-text">New to Netflix? <a href="#" class="sign-up-now">Sign up now.</a></p>
+    
+                    <p class="grey-text captcha">This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Questions? Call 000-800-919-1694</p>
+            <div class="flex-col">
+                <div class="c-1">
+                    <a href="">FAQ</a>
+                    <a href="">Cookie Preferences</a>
+                    <button class="language transparent btn">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="16" height="16" viewBox="0 0 16 16" role="img" data-icon="LanguagesSmall" aria-hidden="true">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7668 5.33333L10.5038 5.99715L9.33974 8.9355L8.76866 10.377L7.33333 14H9.10751L9.83505 12.0326H13.4217L14.162 14H16L12.5665 5.33333H10.8278H10.7668ZM10.6186 9.93479L10.3839 10.5632H11.1036H12.8856L11.6348 7.2136L10.6186 9.93479ZM9.52722 4.84224C9.55393 4.77481 9.58574 4.71045 9.62211 4.64954H6.41909V2H4.926V4.64954H0.540802V5.99715H4.31466C3.35062 7.79015 1.75173 9.51463 0 10.4283C0.329184 10.7138 0.811203 11.2391 1.04633 11.5931C2.55118 10.6795 3.90318 9.22912 4.926 7.57316V12.6667H6.41909V7.51606C6.81951 8.15256 7.26748 8.76169 7.7521 9.32292L8.31996 7.88955C7.80191 7.29052 7.34631 6.64699 6.9834 5.99715H9.06968L9.52722 4.84224Z" fill="currentColor">
+                                </path>
+                            </svg> 
+                            English 
+                            <img src="./images/icons/dropdown.png">    
+                        </span>
+                    </button>
+                </div>
+                <div class="c-2">
+                    <a href="">Help Centre</a>
+                    <a href="">Corporate Information</a>
+                </div>
+                <div class="c-3">
+                    <a href="">Terms of Use</a>
+                </div>
+                <div class="c-4">
+                    <a href="">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="after-sign-in">
+        <div id="header" class="">
+            <nav class="navbar container">
+                <div class="navbar-logo">
+                    <img src="./images/netflix_logo.png" class="netflix-logo">
+                </div>
+                <div class="nav-main">
+                    <ul>
+                        <li class="nav-items active" data-category="all"><span>Home</span></li>
+                        <li class="nav-items" data-category="tv-shows"><span>TV Shows</span></li>
+                        <li class="nav-items" data-category="movies"><span>Movies</span></li>
+                        <li class="nav-items" data-category="news-popular"><span>News & Popular</span></li>
+                        <li class="nav-items" data-category="my-list"><span>My List</span></li>
+                        <li class="nav-items" data-category="languages">
+                            <span>Browse by Languages</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <ul>
+                        <li class="nav-right-item"><img src="./images/icons/search.png" class="search"></li>
+                        <li class="nav-right-item"><img src="./images/icons/bell.png" class="bell-notification"></li>
+                        <li class="nav-right-item"><img src="./images/icons/user.png" class="user"></li>
+                        <li class="nav-right-item center dropdown"><img src="./images/icons/dropdown.png" class="dropdown-img">
+                            <div class="dropdown-content">
+                                <ul>
+                                    <li class="drop-options"><img src="./images/kids.jpeg" class="kids">Kids</li>
+                                    <li class="drop-options">Manage Profile</li>
+                                    <hr width="100%">
+                                    <li class="drop-options">Account</li>
+                                    <li class="drop-options">Help Centre</li>
+                                    <li class="drop-options">Sign out of Netflix</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    
+        <div class="main">
+            <div class="banner" id="banner-section">
+            <!-- <div class="banner" id="banner-section" style="background-image: url(./data/banner/avatar-the-last-airbender.jpg);"> -->
+                <!-- <div class="banner-content container">
+                        <h2 class="banner-title">DEHLI CRIME</h2>
+                        <p class="banner-info">#4 in TV Shows Today</p>
+                        <p class="banner-overview">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+                        <div class="action-buttons">
+                            <button class="action"><img src="./images/icons/play.png">Play</button>
+                            <button class="action"><img src="./images/icons/info.png">More Info</button>
+                        </div>
+                    </div> -->
+                <div class="banner_fadeBottom"></div>
+            </div>
+            
+            <div class="movie container" id="movie-section">
+                    <!-- <div class="movie-section">
+                            <h2 class="movie-section-heading">Trending Now
+                                <span class="explore-nudge">Explore All</span>
+                            </h2>
+                            <div class="movie-row">
+                                <div class="movie-item">
+                                    <img src="..." alt="...">
+                                    <div class="access">
+                                    <ul class="first">
+                                        <li class="access-item"><img src="./images/icons/play-circle.png"></li>
+                                        <li class="access-item"><img src="./images/icons/add.png"></li>
+                                        <li class="access-item"><img src="./images/icons/thumbs-up.png"></li>
+                                        <li class="access-item"><img src="./images/icons/thumbs-down.png"></li>
+                                        <li class="access-item last"><img src="./images/icons/down-button.png"></li>
+                                    </ul>
+                                    <ul class="second">
+                                        <li class="access-item"><p class="green">93% Match</p></li>
+                                        <li class="access-item"><p class="box">13+</p></li>
+                                        <li class="access-item"><p>1 Season</p></li>
+                                        <li class="access-item"><span class="box hd">HD</span></li>
+                                    </ul>
+                                    <ul class="third">
+                                        <li class="access-item">genre</li>
+                                        <li class="access-item">genre</li>
+                                        <li class="access-item">genre</li>
+                                    </ul>
+                                    </div>
+                                </div>
+                            <div class="movie-item"><img src="..." alt="..."></div>
+                            <div class="movie-item"><img src="..." alt="..."></div>
+                            <div class="movie-item"><img src="..." alt="..."></div>
+                            <div class="movie-item"><img src="..." alt="..."></div>
+                        </div>
+                    </div> -->
+                </div>
+        </div>
+    
+        <div class="my-list container">
+            <h2 class="movie-section-heading">My List</h2>
+            <div class="my-row">
+            </div>
+        </div>
+    
+        <div class="language-filter container">
+            <div>
+                <h1 class="heading">Browse by Languages</h1>
+            </div>
+            <div class="fitler-div">
+                <span>Select your preferences</span>
+                <select id="audio">
+                    <option value="">Original Language</option>
+                    <option value="">Dubbing</option>
+                    <option value="">Subtitles</option>
+                </select>
+                <select id="subtitle">
+                    <option value="">Arabic</option>
+                    <option value="">Cantonese</option>
+                    <option value="">Dutch</option>
+                    <option value="">English</option>
+                    <option value="">French</option>
+                    <option value="">German</option>
+                    <option value="">Hindi</option>
+                    <option value="">Indonesian</option>
+                    <option value="">Japanese</option>
+                    <option value="">Mandarin</option>
+                    <option value="">Malay</option>
+                    <option value="">Polish</option>
+                    <option value="">Portuguese</option>
+                    <option value="">Spanish</option>
+                    <option value="">Thai</option>
+                    <option value="">Turkish</option>
+                    <option value="">Vietnamese</option>
+                </select>
+    
+                <span>Sort By</span>
+                <select id="filter">
+                    <option value="">Suggestions for you</option>
+                    <option value="">Year Released</option>
+                    <option value="">A-Z</option>
+                    <option value="">Z-A</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="Text/JavaScript" src="./data/user.js"></script>
+    <script type="Text/JavaScript" src="./data/genre.js"></script>
+    <script type="Text/JavaScript" src="./data/data.js"></script>
+    <script type="Text/JavaScript" src="./script.js"></script>
+</body>
+</html>
