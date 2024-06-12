@@ -268,6 +268,21 @@ function getMoviesByCategory(dataList, categoryName) {
     return filteredData;
 }
 
+function sortByReleaseDate(dataList) {
+    return dataList.sort((a, b) => {
+        let dateA = new Date(a.release_date);
+        let dateB = new Date(b.release_date);
+        return dateB - dateA;
+    });
+}
+
+function getLatestPopularShows(dataList, minResults = 20) {
+    let sortedShows = sortByReleaseDate(dataList);
+
+    return { results: sortedShows.slice(0, minResults) };
+}
+
+
 function setActiveNavItem(activeItem) {
     $('.nav-items').removeClass('active');
     $(activeItem).addClass('active');
@@ -303,8 +318,8 @@ function filterContent(category) {
         clearSections();
         fetchAndBuildAllSections(data, genre_data);
     }
-    else if(category === "news-popular") {
-        data = getMoviesByCategory(tmdb_example.results, "News");
+    else if(category === "new-popular") {
+        data = getLatestPopularShows(tmdb_example.results);
         clearSections();
         fetchAndBuildAllSections(data, genre_data);
     }
@@ -368,55 +383,80 @@ function clearSections() {
 // }
 
 
-// My list
-myList = {results : []};
+//Add to list
+$(document).ready(() => {
+    if(localStorage.getItem('myList')) {
+        myList = JSON.parse(localStorage.getItem('myList'));
+    }
 
-// function addToList(movieItem) {
-//     let container = $(".my-list.container");
-//     let currRow = $(container).children().last();
+    initializeButtons();
 
-//     // Clone the movie item to avoid direct manipulation
-//     let clonedMovieItem = $(movieItem).clone();
-//     $(currRow).append(clonedMovieItem);
-// }
+    setInterval(initializeButtons, 1000);
+})
 
-
-
-
-
-$(document).ready(function() {
-    $('.access-item[cat="add-to-list"] button').on('click', function(event) {
-        event.preventDefault();
-        var movieItem = $(this).closest('.movie-item');
+function initializeButtons() {
+    $('.movie-item').each(function() {
+        var movieItem = $(this);
         var movieId = movieItem.attr('id');
-        var myListContainerRow = $('.my-list.container .my-row');
 
-        // Find the movie details from tmdb_examples based on the id
-        var movieDetails;
-        for (var i = 0; i < tmdb_examples.results.length; i++) {
-            if (tmdb_examples.results[i].id === movieId) {
-                movieDetails = tmdb_examples.results[i];
+        // Check if the movie is in myList
+        var isInMyList = false;
+        for (var i = 0; i < myList.results.length; i++) {
+            if (myList.results[i].id == movieId) {
+                isInMyList = true;
                 break;
             }
         }
 
-        // Check if the movie is already in the my-list
-        var existingMovie = myListContainerRow.find('.movie-item[id="' + movieId + '"]');
-        if (existingMovie.length > 0) {
-            // Remove from my-list
-            existingMovie.remove();
-            $(this).html('<img src="./images/icons/add.png">'); // Change button to add icon
-        } else {
-            // Add to my-list
-            mylist.results.push(movieDetails); // Add movie details to mylist
-            var newMovieItem = movieItem.clone(); // Clone the movie item
-            newMovieItem.attr('id', movieId); // Set id attribute
-            myListContainerRow.append(newMovieItem); // Append to my-list
-            $(this).html('<img src="./images/icons/tick.png">'); // Change button to checkmark icon
+        // Update the button icon based on the movie's presence in myList
+        var button = movieItem.find('.access-item[cat="add-to-list"] button');
+        if (isInMyList) {
+            button.html('<img src="./images/icons/tick.png">');
+        } 
+        else {
+            button.html('<img src="./images/icons/add.png">');
         }
     });
-});
+}
 
+$(document).on('click', '.access-item[cat="add-to-list"] button', function(event) {
+    event.preventDefault();
+    var movieItem = $(this).closest('.movie-item');
+    var movieId = movieItem.attr('id');
+    var myListContainerRow = $('.my-list.container .my-row');
+
+    var movieDetails;
+    for (var i = 0; i < tmdb_example.results.length; i++) {
+        if (tmdb_example.results[i].id === movieId) {
+            movieDetails = tmdb_example.results[i];
+            break;
+        }
+    }
+
+    var existingMovie = myListContainerRow.find('.movie-item[id="' + movieId + '"]');
+    if (existingMovie.length > 0) {
+        // Removing if movie exists in the my list
+        existingMovie.remove();
+        $(this).html('<img src="./images/icons/add.png">');
+
+        for (var j = 0; j < myList.results.length; j++) {
+            if (myList.results[j].id == movieId) {
+                myList.results.splice(j, 1);
+                break;
+            }
+        }
+    } 
+    else {
+        myList.results.push(movieDetails);
+
+        var newMovieItem = movieItem.clone(); // Clone the movie
+        newMovieItem.attr('id', movieId); // Set id attribute
+        myListContainerRow.append(newMovieItem); // Append to my-list
+        $(this).html('<img src="./images/icons/tick.png">');
+    }
+
+    localStorage.setItem('myList', JSON.stringify(myList));
+});
 
 
 // function scrollToSection(section) {

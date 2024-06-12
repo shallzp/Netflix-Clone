@@ -347,7 +347,7 @@ tmdb_example = { results : [{
             genre_ids: [14, 12, 10751],
             id : "671",
             original_language : "en",
-            title : "Harry Potter and the Philosopher's Stone",
+            title : "Harry Potter and the Philosophers Stone",
             popularity : 99.321,
             vote_count: 20000,
             category : "Film",
