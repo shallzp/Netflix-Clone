@@ -14,7 +14,6 @@ function initial_setup() {
 function init() {
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
-    // setupButton();
 }
 
 $(document).ready(() => {
@@ -31,15 +30,15 @@ $(document).ready(() => {
     });
 
 
-    $('.scroll-left').click(function() {
-        var movieRow = $(this).siblings('.movie-row');
-        movieRow.scrollLeft(movieRow.scrollLeft() - 100);
-    });
+    // $('.scroll-left').click(function() {
+    //     var movieRow = $(this).siblings('.movie-row');
+    //     movieRow.scrollLeft(movieRow.scrollLeft() - 100);
+    // });
     
-    $('.scroll-right').click(function() {
-        var movieRow = $(this).siblings('.movie-row');
-        movieRow.scrollLeft(movieRow.scrollLeft() + 100);
-    });
+    // $('.scroll-right').click(function() {
+    //     var movieRow = $(this).siblings('.movie-row');
+    //     movieRow.scrollLeft(movieRow.scrollLeft() + 100);
+    // });
 }); 
 
 
@@ -50,6 +49,8 @@ function signUpBtn() {
     scrollToSection($("#sign-up"));
 }
 
+
+//error
 function getStarted() {
     var emailValue = $("#email").val().trim();
 
@@ -64,14 +65,39 @@ function getStarted() {
 
 function toggleDiv(divCl) {
     $("." + divCl).toggle(250);
-
-    // $(this).find(".plus").toggle();
-    // $(this).find(".mul").toggle();
 }
 
 
 
 //Sign-in Page
+// Remember Me
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {   
+    document.cookie = name + '=; Max-Age=-99999999;';  
+}
+
+var currentUser = null;
+
 function validateSignUp() {
     var isValid = true;
 
@@ -89,10 +115,22 @@ function validateSignUp() {
         isValid = false;
     }
 
-    if(isValid) {
-        var user = user_data.users[0];
-        if ((enumVal === user.email || enumVal === user.username) && password === user.password) {
+    if (isValid) {
+        var user = user_data.users.find(function (user) {
+            return (enumVal === user.email || enumVal === user.username) && password === user.password;
+        });
+
+        if (user) {
+            currentUser = user;
+            if ($('#remember-me').is(':checked')) {
+                setCookie('rememberMe', enumVal + ':' + password, 7);
+                console.log("Automatically logged in using cookie!");
+            } 
+            else {
+                eraseCookie('rememberMe');
+            }
             scrollToSection($("#after-sign-in"));
+            return true;
         } 
         else {
             $(".invalid.credential").show();
@@ -101,7 +139,20 @@ function validateSignUp() {
     }
 
     return isValid;
-} 
+}
+
+$(document).ready(function () {
+    var rememberMe = getCookie('rememberMe');
+    if (rememberMe) {
+        var credentials = rememberMe.split(':');
+        $('#email-number').val(credentials[0]);
+        $('#password').val(credentials[1]);
+        $('#remember-me').prop('checked', true);
+        currentUser = user_data.users.find(function (user) {
+            return (credentials[0] === user.email || credentials[0] === user.username) && credentials[1] === user.password;
+        });
+    }
+});
 
 
 
@@ -186,8 +237,8 @@ function buildMovieSection(dataList, category_name) {
                 <ul class="first">
                     <li class="access-item" cat="play-video"><button><img src="./images/icons/play-circle.png"></button></li>
                     <li class="access-item" cat="add-to-list"><button><img src="./images/icons/add.png"></button></li>
-                    <li class="access-item" cat="like"><button><img src="./images/icons/thumbs-up.png"></button></li>
-                    <li class="access-item" cat="dislike"><button><img src="./images/icons/thumbs-down.png"></button></li>
+                    <li class="access-item" cat="like"><button><img src="./images/icons/like.png"></button></li>
+                    <li class="access-item" cat="dislike"><button><img src="./images/icons/dislike.png"></button></li>
                     <li class="access-item last" cat="big-screen"><button><img src="./images/icons/down-button.png"></button></li>
                 </ul>
                 <ul class="second">
@@ -207,12 +258,8 @@ function buildMovieSection(dataList, category_name) {
     const movieSectionHTML = `
     <div class="movie-section">
         <h2 class="movie-section-heading">${category_name} <span class="explore-nudge">Explore All</span></h2>
-        <div class="movie-row-container">
-            <button class="scroll-left">&lt;</button>
-            <div class="movie-row">
-                ${movieListHTML}
-            </div>
-            <button class="scroll-right">&gt;</button>
+        <div class="movie-row">
+            ${movieListHTML}
         </div>
     </div>
     `;
@@ -250,8 +297,6 @@ function Hover() {
     $(".movie-item").hover(function() {
         $(this).find(".access").removeClass("on-hover");
         $(this).closest('.movie-row').css('overflow', 'visible');
-        //const movieId = $(this).attr("id");
-        // setupButton();
     }, noHover);
 }
   
@@ -348,50 +393,15 @@ function clearSections() {
 }
 
 
-//Access Buttons
-// function setupButton() {
-//     const accessItems = $(".first.access-item");
-//     // const movieItem = $(".first.access-item").closest(".movie-item");
-//     const movieItem = $(".first.access-item").parent().parent();
-
-//     accessItems.each(function() {
-//         $(this).find("button").on('click', function() {
-//             const accessItemCat = $(this).parent().attr("cat");
-//             filterButtonContent(accessItemCat, movieItem);
-//         });
-//     });
-// }
-
-// function filterButtonContent(buttonCategory, movieItem) {
-//     if(buttonCategory === "play-video") {
-        
-//     } 
-//     else if(buttonCategory === "add-to-list") {
-//         addToList(movieItem);
-//         // Update button icon to tick mark
-//         $(movieItem).find(".first.access-item[cat='add-to-list'] button img").attr("src", "./images/icons/tick.png");
-//     } 
-//     else if(buttonCategory === "like") {
-        
-//     } 
-//     else if(buttonCategory === "dislike") {
-        
-//     }
-//     else if(buttonCategory === "big-screen") {
-        
-//     }
-// }
-
-
-//Add to list
+//Access Button
 $(document).ready(() => {
-    if(localStorage.getItem('myList')) {
-        myList = JSON.parse(localStorage.getItem('myList'));
+    if(localStorage.getItem('user_data')) {
+        user_data = JSON.parse(localStorage.getItem('user_data'));
     }
 
     initializeButtons();
 
-    setInterval(initializeButtons, 1000);
+    setInterval(initializeButtons, 2500);
 })
 
 function initializeButtons() {
@@ -399,7 +409,8 @@ function initializeButtons() {
         var movieItem = $(this);
         var movieId = movieItem.attr('id');
 
-        // Check if the movie is in myList
+        var myList = currentUser.watchlist;
+
         var isInMyList = false;
         for (var i = 0; i < myList.results.length; i++) {
             if (myList.results[i].id == movieId) {
@@ -408,7 +419,6 @@ function initializeButtons() {
             }
         }
 
-        // Update the button icon based on the movie's presence in myList
         var button = movieItem.find('.access-item[cat="add-to-list"] button');
         if (isInMyList) {
             button.html('<img src="./images/icons/tick.png">');
@@ -419,8 +429,18 @@ function initializeButtons() {
     });
 }
 
+//Play
+
+//Add to list
 $(document).on('click', '.access-item[cat="add-to-list"] button', function(event) {
     event.preventDefault();
+    if (!currentUser) {
+        alert('You must be signed in to manage your watchlist.');
+        return;
+    }
+
+    var myList = currentUser.watchlist;
+
     var movieItem = $(this).closest('.movie-item');
     var movieId = movieItem.attr('id');
     var myListContainerRow = $('.my-list.container .my-row');
@@ -445,44 +465,24 @@ $(document).on('click', '.access-item[cat="add-to-list"] button', function(event
                 break;
             }
         }
-    } 
-    else {
+    } else {
         myList.results.push(movieDetails);
 
-        var newMovieItem = movieItem.clone(); // Clone the movie
+        var newMovieItem = movieItem.clone(); // Clone the movie item
         newMovieItem.attr('id', movieId); // Set id attribute
         myListContainerRow.append(newMovieItem); // Append to my-list
         $(this).html('<img src="./images/icons/tick.png">');
     }
 
-    localStorage.setItem('myList', JSON.stringify(myList));
+    localStorage.setItem('user_data', JSON.stringify(user_data));
 });
 
+//thumbs up and down
 
-// function scrollToSection(section) {
-//     if (section.length) {
-//         $('body > div').hide();
-//         section.show();
-//         $('html, body').animate({
-//             scrollTop: section.offset().top
-//         }, 500);
-
-//         window.location.hash = section.attr('id');
-//     }
-// }
-
-// // Scroll to the section when the hash changes
-// // Not opening because of credential login
-
-// $(window).on('hashchange', function() {
-//     const hash = window.location.hash;
-//     if (hash) {
-//         const section = $(hash);
-//         scrollToSection(section);
-//     }
-// });
+//Enlarge
 
 
+//Routing change
 function scrollToSection(section, dataCategory = '') {
     if (section.length) {
         $('body > div').hide();
@@ -498,13 +498,12 @@ function scrollToSection(section, dataCategory = '') {
 
 // Scroll to the section when the hash changes
 // Not opening because of credential login
-
-$(window).on('hashchange', function() {
-    const { section, dataCategory } = getSectionFromHash();
-    if (section.length) {
-        scrollToSection(section, dataCategory);
-    }
-});
+// $(window).on('hashchange', function() {
+//     const { section, dataCategory } = getSectionFromHash();
+//     if (section.length) {
+//         scrollToSection(section, dataCategory);
+//     }
+// });
 
 function getSectionFromHash() {
     const hash = window.location.hash;

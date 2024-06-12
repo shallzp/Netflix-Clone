@@ -11,7 +11,7 @@ tmdb_example = { results : [{
             backdrop_path : "./data/backdrops/star-war.jpg",
             banner : "./data/banner/.jpg"   
          },
-            {  
+         {  
             adult : false,
             overview : "Armed with the astonishing ability to shrink in scale but increase in strength, con-man Scott Lang must embrace his inner-hero and help his mentor, Dr. Hank Pym, protect the secret behind his spectacular Ant-Man suit from a new generation of towering threats. Against seemingly insurmountable obstacles, Pym and Lang must plan and pull off a heist that will save the world.",
             release_date :"2015-07-17",
@@ -456,8 +456,8 @@ tmdb_example = { results : [{
             popularity : 40.8791,
             category : "Film",
             backdrop_path : "./data/backdrops/indiana-jones-temple-of-doom.jpg",
-            banner : "./data/banner/.jpg"},
-
+            banner : "./data/banner/.jpg"
+         },
          {
             adult : false,
             overview : "The life of Charles Darwin, his role in the development of the theory of evolution, and his struggle with his own faith.",

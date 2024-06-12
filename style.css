@@ -723,7 +723,7 @@ img.explore-nudge {
   display: inline-block;
 }
 
-.movie-row-container {
+/* .movie-row-container {
   display: grid;
   grid-template-columns: 0.005fr 0.99fr 0.005fr;
 }
@@ -733,7 +733,7 @@ img.explore-nudge {
   color: white;
   border: none;
   line-height: 100%;
-}
+} */
 
 .movie-row {
   display: flex;
