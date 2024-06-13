@@ -262,6 +262,7 @@ function filterContent(category) {
         $(".main").hide();
         $(".language-filter").hide();
         $(".my-list").show();
+        initializeWatchlist();
     }
     else if (category === "languages") {
         $(".main").hide();
@@ -390,8 +391,9 @@ function createMovieItem(item) {
     const filteredGenres = genres.filter(genreName => genreName);
     const genreList = filteredGenres.join(', ');
 
+    // onmouseover="searchMovieTrailer('${item.title}', 'yt${item.id}')"
     return `
-    <div class="movie-item" onmouseover="searchMovieTrailer('${item.title}', 'yt${item.id}')" id="${item.id}">
+    <div class="movie-item" id="${item.id}">
         <img class="movie-item-img" src="${item.backdrop_path}" alt="${item.title}">
         <div class="yt-iframe" id="yt${item.id}"></div>
         
@@ -428,17 +430,29 @@ function Hover() {
     $(".movie-item").hover(function() {
         $(this).find(".access").removeClass("on-hover");
         $(this).closest('.movie-row').css('overflow', 'visible');
+
+        var movieId = $(this).attr('id');
+        for (var i = 0; i < tmdb_example.results.length; i++) {
+            if (tmdb_example.results[i].id === movieId) {
+                movieName = tmdb_example.results[i].title;
+                setTimeout(() => {
+                    searchMovieTrailer(movieName, `yt${movieId}`);
+                }, 3000);
+            }
+        }
     }, noHover);
 }
 
 
 //Access Button
 function initializeButtons() {
-    var myList = currentUser.watchlist;
-
     $('.movie-item').each(function() {
         var movieItem = $(this);
         var movieId = movieItem.attr('id');
+
+
+        //Watchlist
+        var myList = currentUser.watchlist;
 
         var isInMyList = myList.results.some(movie => movie.id == movieId);
 
@@ -448,17 +462,60 @@ function initializeButtons() {
         } else {
             button.html('<img src="./images/icons/add.png">');
         }
-    });
 
-    const myListHTML = myList.results.map(item => createMovieItem(item)).join('');
-    $(".my-list.container .my-row").append(myListHTML);
+
+        //Liked
+        var liked = currentUser.like;
+
+        var isLiked = liked.results.some(movie => movie.id == movieId);
+
+        var button = movieItem.find('.access-item[cat="like"] button');
+        if (isLiked) {
+            button.html('<img src="./images/icons/liked.png">');
+        } else {
+            button.html('<img src="./images/icons/like.png">');
+        }
+
+
+        //Disliked
+        var disliked = currentUser.dislike;
+
+        var isDisliked = disliked.results.some(movie => movie.id == movieId);
+
+        var button = movieItem.find('.access-item[cat="dislike"] button');
+        if (isDisliked) {
+            button.html('<img src="./images/icons/disliked.png">');
+        } else {
+            button.html('<img src="./images/icons/dislike.png">');
+        }
+    });
+}
+
+function initializeWatchlist() {
+    var myList = currentUser.watchlist;
+
+    var myListContainerRow = $('.my-list.container .my-row');
+
+    for (var i = 0; i < myList.results.length; i++) {
+        var movieId = myList.results[i].id;
+    
+        var existingMovie = myListContainerRow.find('.movie-item[id="' + movieId + '"]');
+    
+        if (existingMovie.length > 0) {
+            return;
+        }
+        else {
+            const myListHTML = myList.results.map(item => createMovieItem(item)).join('');
+            $(".my-list.container .my-row").append(myListHTML);
+        }
+    }
 }
 
 //Play
 
 //Add to list
 $(document).on('click', '.access-item[cat="add-to-list"] button', function(event) {
-    // event.preventDefault();
+    event.preventDefault();
     if (!currentUser) {
         alert('You must be signed in to manage your watchlist.');
         return;
@@ -493,15 +550,84 @@ $(document).on('click', '.access-item[cat="add-to-list"] button', function(event
     } 
     else {
         myList.results.push(movieDetails);
-
-        var newMovieItem = createMovieItem(movieDetails);
-        myListContainerRow.append(newMovieItem); //Append to my-list
         $(this).html('<img src="./images/icons/tick.png">');
     }
 
     localStorage.setItem('user_data', JSON.stringify(user_data));
 });
 
-//thumbs up and down
+//Like
+$(document).on('click', '.access-item[cat="like"] button', function(event) {
+    event.preventDefault();
+    if (!currentUser) {
+        alert('You must be signed in to manage your likes.');
+        return;
+    }
+
+    var liked = currentUser.like;
+
+    var movieItem = $(this).closest('.movie-item');
+    var movieId = movieItem.attr('id');
+    
+    var movieDetails;
+    for (var i = 0; i < tmdb_example.results.length; i++) {
+        if (tmdb_example.results[i].id === movieId) {
+            movieDetails = tmdb_example.results[i];
+            break;
+        }
+    }
+
+    var index = liked.results.findIndex(function(item) {
+        return item.id === movieId;
+    });
+
+    if (index !== -1) {
+        liked.results.splice(index, 1);
+        $(this).html('<img src="./images/icons/like.png">');
+    } 
+    else {
+        liked.results.push(movieDetails);
+        $(this).html('<img src="./images/icons/liked.png">');
+    }
+
+    localStorage.setItem('user_data', JSON.stringify(user_data));
+});
+
+//Dislike 
+$(document).on('click', '.access-item[cat="dislike"] button', function(event) {
+    event.preventDefault();
+    if (!currentUser) {
+        alert('You must be signed in to manage your dislikes.');
+        return;
+    }
+
+    var disliked = currentUser.dislike;
+
+    var movieItem = $(this).closest('.movie-item');
+    var movieId = movieItem.attr('id');
+    
+    var movieDetails;
+    for (var i = 0; i < tmdb_example.results.length; i++) {
+        if (tmdb_example.results[i].id === movieId) {
+            movieDetails = tmdb_example.results[i];
+            break;
+        }
+    }
+
+    var index = disliked.results.findIndex(function(item) {
+        return item.id === movieId;
+    });
+
+    if (index !== -1) {
+        disliked.results.splice(index, 1);
+        $(this).html('<img src="./images/icons/dislike.png">');
+    } 
+    else {
+        disliked.results.push(movieDetails);
+        $(this).html('<img src="./images/icons/disliked.png">');
+    }
+    localStorage.setItem('user_data', JSON.stringify(user_data));
+});
+
 
 //Enlarge

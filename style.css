@@ -13,6 +13,9 @@ body {
   font-family: Helvetica, Arial, sans-serif;
 }
 
+
+
+
 /* front sign-in page */
 #front-sign-in .main, #sign-up .main{
   background-image: url(./images/front-background.jpg);
@@ -375,6 +378,7 @@ section {
 
 
 
+
 /* Get Started */
 #get-started {
   background-color: white;
@@ -480,6 +484,7 @@ section {
 
 
 
+
 /* Sign-up Page */
 .sign-main {
   height: 800px;
@@ -532,7 +537,7 @@ section {
   height: 56px;
 }
 
-.sign-up-form .email-number:focus-within label, .sign-up-form .password:focus-within label  {
+.sign-up-form .email-number:focus label, .sign-up-form .password:focus-within label {
   font-size: 0.8rem;
   top: 10px;
 }
@@ -609,6 +614,7 @@ section {
 .captcha a {
   color: blue;
 }
+
 
 
 
@@ -695,6 +701,7 @@ section {
   width: 15px;
 }
 
+
 /* Movie */
 .movie-section {
   margin: 41px 0;
@@ -760,11 +767,10 @@ img.explore-nudge {
 }
 
 .movie-item-img {
-  /* width: 100%; */
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   width: inherit;
-  position: relative; /* Keep image in the normal document flow */
+  position: relative;
   z-index: 10;
 }
 
@@ -976,7 +982,6 @@ img.explore-nudge {
   position: absolute;
   background-color: #141414;
   min-width: 160px;
-  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
 }
 .dropdown-content ul {
