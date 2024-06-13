@@ -1,7 +1,3 @@
-const yt_api_key = `${process.env.API_KEY}`;
-const yt_api_path = (query) => `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${yt_api_key}`;
-
-
 function initial_setup() {
     $(".ans").hide();
 
