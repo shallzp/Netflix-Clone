@@ -670,6 +670,12 @@ section {
   opacity: .83;
 }
 
+.nav-items span:hover {
+  color: white;
+  opacity: 1;
+  font-weight: 500;
+}
+
 .nav-items.active span {
   color: white;
   opacity: 1;
@@ -980,6 +986,7 @@ img.explore-nudge {
   margin: 0;
   display: none;
   position: absolute;
+  right: 0px;
   background-color: #141414;
   min-width: 160px;
   z-index: 1;
@@ -1008,7 +1015,7 @@ img.explore-nudge {
   border: red solid 1px;
 }
 
-.dropdown:hover .dropdown-content {
+.menu-toggle {
   display: block;
 }
 
@@ -1037,7 +1044,8 @@ img.explore-nudge {
 
 .language-filter{
   display: grid;
-  grid-template-columns: 0.4fr 0.6fr;
+  grid-template-columns: 0.39fr 0.63fr;
+  align-items: center;
 }
 
 .language-filter div {
@@ -1050,4 +1058,94 @@ img.explore-nudge {
 .language-filter .filter-div {
   display: flex;
   flex-direction: row;
+  justify-content: right;
+  gap: 10px;
+}
+
+.language-filter .filter-div span {
+  color: white;
+  font-weight: 500;
+}
+
+.lang-dropdown {
+  position: relative;
+}
+
+.lang-dropdown .select {
+  background-color: #141414;
+  color: white;
+  border: white solid 0.1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+
+.select span {
+  padding: 0 15px 0 0;
+}
+
+.select:hover {
+  background-color: #363636;
+}
+
+.select-clicked {
+  border: 0.1px white solid;
+}
+
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid white;
+}
+
+.menu {
+  list-style: none;
+  background-color: rgba(23, 23, 23, 0.6);
+  color: white;
+  cursor: pointer;
+  margin: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  display: none;
+  transition: 0.2s;
+  opacity: 0;
+  z-index: 1;
+}
+
+.menu li {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background-color: #363636;
+}
+
+.dropdown-active {
+  background-color: #363636;
+}
+
+.menu-open {
+  display: block;
+  opacity: 1;
+}
+
+#audio {
+  min-width: 180px;
+}
+
+#subtitle {
+  min-width: 130px;
+}
+
+#filter {
+  min-width: 190px;
 }

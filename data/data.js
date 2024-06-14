@@ -9,7 +9,9 @@ tmdb_example = { results : [{
             popularity : 79.28243,            
             category : "Film",
             backdrop_path : "./data/backdrops/star-war.jpg",
-            banner : "./data/banner/.jpg"   
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -22,7 +24,9 @@ tmdb_example = { results : [{
             popularity : 36.106324,
             category : "Film",
             backdrop_path : "./data/backdrops/ant-man.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -35,7 +39,9 @@ tmdb_example = { results : [{
             popularity : 30.053033,
             category : "Film",
             backdrop_path : "./data/backdrops/jurassic-world.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -48,7 +54,9 @@ tmdb_example = { results : [{
             popularity : 29.571367,
             category : "Film",
             backdrop_path : "./data/backdrops/the-martian.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -61,7 +69,9 @@ tmdb_example = { results : [{
             popularity : 24.89044,
             category : "Film",
             backdrop_path : "./data/backdrops/mad-max.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -74,7 +84,9 @@ tmdb_example = { results : [{
             popularity : 19.32191,
             category : "Film",
             backdrop_path : "./data/backdrops/mission-impossible.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -87,7 +99,9 @@ tmdb_example = { results : [{
             popularity : 19.109008,
             category : "Film",
             backdrop_path : "./data/backdrops/minions.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -100,7 +114,9 @@ tmdb_example = { results : [{
             popularity : 18.795489,
             category : "Film",
             backdrop_path : "./data/backdrops/terminator.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -113,7 +129,9 @@ tmdb_example = { results : [{
             popularity : 18.086175,
             category : "Film",
             backdrop_path : "./data/backdrops/spectre.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -126,7 +144,9 @@ tmdb_example = { results : [{
             popularity : 17.44518,
             category : "Film",
             backdrop_path : "./data/backdrops/the-hunger-games(2).jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -139,7 +159,9 @@ tmdb_example = { results : [{
             popularity : 17.290864,
             category : "Film",
             backdrop_path : "./data/backdrops/southpaw.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -152,7 +174,9 @@ tmdb_example = { results : [{
             popularity : 15.787166,
             category : "Film",
             backdrop_path : "./data/backdrops/interstellar.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -165,7 +189,9 @@ tmdb_example = { results : [{
             popularity : 14.970207,
             category : "Film",
             backdrop_path : "./data/backdrops/big-hero-6.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -178,7 +204,9 @@ tmdb_example = { results : [{
             popularity : 14.960069,
             category : "Film",
             backdrop_path : "./data/backdrops/the-revenant.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -191,7 +219,9 @@ tmdb_example = { results : [{
             popularity : 14.148873,
             category : "Film",
             backdrop_path : "./data/backdrops/inside-out.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -204,7 +234,9 @@ tmdb_example = { results : [{
             popularity : 14.125181,
             category : "Film",
             backdrop_path : "./data/backdrops/the-hobbit.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -217,7 +249,9 @@ tmdb_example = { results : [{
             popularity : 13.737843,
             category : "Film",
             backdrop_path : "./data/backdrops/the-hateful-8.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -230,7 +264,9 @@ tmdb_example = { results : [{
             popularity : 13.404845,
             category : "Film",
             backdrop_path : "./data/backdrops/the-hunger-games(1).jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -243,7 +279,9 @@ tmdb_example = { results : [{
             popularity : 12.525953,
             category : "Film",
             backdrop_path : "./data/backdrops/age-of-ultron.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {  
             adult : false,
@@ -256,7 +294,9 @@ tmdb_example = { results : [{
             popularity : 12.122457,
             category : "Film",
             backdrop_path : "./data/backdrops/everest.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -269,7 +309,9 @@ tmdb_example = { results : [{
             popularity : 87.328,
             category : "Film",
             backdrop_path : "./data/backdrops/avengers-endgame.jpg",
-            banner : "./data/banner/avengers-endgame.jpg"
+            banner : "./data/banner/avengers-endgame.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -282,7 +324,9 @@ tmdb_example = { results : [{
             popularity : 63.277,
             category : "Film",
             backdrop_path : "./data/backdrops/inception.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -296,7 +340,9 @@ tmdb_example = { results : [{
             vote_count: 15000,
             category : "TV Show",
             backdrop_path : "./data/backdrops/game-of-thrones.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -310,7 +356,9 @@ tmdb_example = { results : [{
             vote_count: 13000,
             category : "Film",
             backdrop_path : "./data/backdrops/the-lion-king.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -324,7 +372,9 @@ tmdb_example = { results : [{
             vote_count: 500,
             category : "Film",
             backdrop_path : "./data/backdrops/hitchcock-truffaut.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -338,7 +388,9 @@ tmdb_example = { results : [{
             vote_count: 8000,
             category : "Film",
             backdrop_path : "./data/backdrops/light-between-oceans.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -352,7 +404,9 @@ tmdb_example = { results : [{
             vote_count: 20000,
             category : "Film",
             backdrop_path : "./data/backdrops/harry-potter-philosopher-stone.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -365,7 +419,9 @@ tmdb_example = { results : [{
             popularity : 95.456,
             category : "Film",
             backdrop_path : "./data/backdrops/joker.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -378,7 +434,9 @@ tmdb_example = { results : [{
             popularity : 70.982,
             category : "Film",
             backdrop_path : "./data/backdrops/fight-club.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -391,7 +449,9 @@ tmdb_example = { results : [{
             popularity : 82.432,
             category : "TV Show",
             backdrop_path : "./data/backdrops/stranger-things.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -404,7 +464,9 @@ tmdb_example = { results : [{
             popularity : 60.897,
             category : "Film",
             backdrop_path : "./data/backdrops/once-upon-a-time-in-hollywood.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -417,7 +479,9 @@ tmdb_example = { results : [{
             popularity : 44.625,
             category : "Film",
             backdrop_path : "./data/backdrops/moonlight.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -430,7 +494,9 @@ tmdb_example = { results : [{
             popularity : 30.123,
             category : "Film",
             backdrop_path : "./data/backdrops/all-is-true.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -443,7 +509,9 @@ tmdb_example = { results : [{
             popularity : 55.324,
             category : "Film",
             backdrop_path : "./data/backdrops/the-choice.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -456,7 +524,9 @@ tmdb_example = { results : [{
             popularity : 40.8791,
             category : "Film",
             backdrop_path : "./data/backdrops/indiana-jones-temple-of-doom.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,
@@ -469,7 +539,9 @@ tmdb_example = { results : [{
             popularity : 29.301,
             category : "Film",
             backdrop_path : "./data/backdrops/creation.jpg",
-            banner : "./data/banner/.jpg"
+            banner : "./data/banner/.jpg",
+            dubbed_language : "hi",
+            subtitles : ["Arabic", "Cantonese", "Dutch", "English", "French", "German", "Hindi", "Indonesian", "Japanese", "Mandarian", "Malay", "Polish", "Portuguese", "Spanish", "Thai", "Turkish", "Vietnamese"]
          },
          {
             adult : false,

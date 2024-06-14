@@ -35,13 +35,15 @@ function getSectionFromHash() {
 function init() {
     $(".ans").hide();
 
-    scrollToSection($("#front-sign-in"));
+    scrollToSection($("#after-sign-in"));
+    // scrollToSection($("#front-sign-in"));
 
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
 
+    $(".main").hide();
     $(".my-list").hide();
-    $(".language-filter").hide();
+    // $(".language-filter").hide();
 }
 
 $(document).ready(() => {
@@ -193,6 +195,10 @@ function validateSignUp() {
 //After sign in - Main Netflix
 
 //Navigation
+$(".dropdown").click(() => {
+    $(".dropdown-content").toggleClass("menu-toggle");
+});
+
 function getMoviesByCategory(dataList, categoryName) {
     filteredResult = dataList.filter(movie => {
         if (movie.category.includes(categoryName)) {
@@ -292,7 +298,7 @@ function buildBanner(movieItem) {
     const bannerSectionHTML = `
     <div class="banner-content container">
         <h2 class="banner-title">${movieItem.title}</h2>
-        <p class="banner-info">#4 in TV Shows Today</p>
+        <p class="banner-info">Watch This now</p>
         <p class="banner-overview">${movieItem.overview}</p>
         <div class="action-buttons">
             <button class="action"><img src="./images/icons/play.png">Play</button>
@@ -629,5 +635,50 @@ $(document).on('click', '.access-item[cat="dislike"] button', function(event) {
     localStorage.setItem('user_data', JSON.stringify(user_data));
 });
 
-
 //Enlarge
+
+
+//Browse by language
+const dropdowns = $(".lang-dropdown");
+dropdowns.each(function() {
+    const dropdown = $(this);
+
+    dropdown.find(".select").click(function() {
+        $(this).toggleClass("select-clicked");
+        dropdown.find(".caret").toggleClass("caret-rotate");
+        dropdown.find(".menu").toggleClass("menu-open");
+    });
+
+    dropdown.find(".menu li").each(function() {
+        const option = $(this);
+
+        option.click(function() {
+            dropdown.find(".selected").text($(this).text());
+            dropdown.find(".select").removeClass("select-clicked");
+            dropdown.find(".caret").removeClass("caret-rotate");
+            dropdown.find(".menu").removeClass("menu-open");
+
+            dropdown.find(".menu li").removeClass("dropdown-active");
+            option.addClass("dropdown-active");
+        });
+    });
+});
+
+
+function filterAudioLanguage() {
+
+}
+
+function filterSubtitleLanguage() {
+
+}
+
+function sortAscending() {
+} 
+
+function sortDescending() {
+
+}
+
+//sortByReleaseDate() is already made above
+
