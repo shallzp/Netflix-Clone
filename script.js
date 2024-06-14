@@ -274,6 +274,7 @@ function filterContent(category) {
         $(".main").hide();
         $(".my-list").hide();
         $(".language-filter").show();
+        initializeFilter(tmdb_example.results);
     }
 
     window.location.hash = "after-sign-in" + '?' + category ;
@@ -513,6 +514,7 @@ function initializeWatchlist() {
         else {
             const myListHTML = myList.results.map(item => createMovieItem(item)).join('');
             $(".my-list.container .my-row").append(myListHTML);
+            Hover();
         }
     }
 }
@@ -645,7 +647,6 @@ dropdowns.each(function() {
 
     dropdown.find(".select").click(function() {
         $(this).toggleClass("select-clicked");
-        dropdown.find(".caret").toggleClass("caret-rotate");
         dropdown.find(".menu").toggleClass("menu-open");
     });
 
@@ -655,30 +656,155 @@ dropdowns.each(function() {
         option.click(function() {
             dropdown.find(".selected").text($(this).text());
             dropdown.find(".select").removeClass("select-clicked");
-            dropdown.find(".caret").removeClass("caret-rotate");
             dropdown.find(".menu").removeClass("menu-open");
-
+        
             dropdown.find(".menu li").removeClass("dropdown-active");
             option.addClass("dropdown-active");
         });
     });
 });
 
+//Appends items in My Row
+function initializeFilter(filterList) {
+    const filterContainerRow = $('.language-filter.container .my-row');
+    filterContainerRow.empty();
 
-function filterAudioLanguage() {
-
+    const filterListHTML = filterList.map(item => createMovieItem(item)).join('');
+    filterContainerRow.append(filterListHTML);
+    Hover();
 }
 
-function filterSubtitleLanguage() {
+//Creates array of languages and adds to dropdown
+function getOriginalLanguages(dataList) {
+    const langSet = new Set();
 
+    for (let i = 0; i < dataList.length; i++) {
+        langSet.add(dataList[i].original_language);
+    }
+
+    const langArray = Array.from(langSet);
+    return langArray;
 }
 
-function sortAscending() {
-} 
+function getDubbedLanguages(dataList) {
+    const langSet = new Set();
 
-function sortDescending() {
+    for (let i = 0; i < dataList.length; i++) {
+        dataList[i].dubbed_language.forEach(language => {
+            langSet.add(language);
+        });
+    }
 
+    const langArray = Array.from(langSet);
+    return langArray;
 }
 
-//sortByReleaseDate() is already made above
+function getSubtitleLanguages(dataList) {
+    const langSet = new Set();
 
+    for (let i = 0; i < dataList.length; i++) {
+        dataList[i].subtitles.forEach(language => {
+            langSet.add(language);
+        });
+    }
+
+    const langArray = Array.from(langSet);
+    return langArray;
+}
+
+function appendLanguagesToList(langArray) {
+    langArray.forEach(language => {
+        const li = `<li>${language}</li>`
+        $("#language .menu").append(li);
+    });
+}
+
+$("#type").find(".menu li").each(function() { 
+    const option = $(this);
+
+    option.click(function() {
+        $("#language .menu").empty();
+        const language = $(this).text();
+
+        if(language === "Original Language"){
+            appendLanguagesToList(getOriginalLanguages(tmdb_example.results));
+        }
+        else if(language === "Dubbing"){
+            appendLanguagesToList(getDubbedLanguages(tmdb_example.results));
+        }
+        else if(language === "Subtitles"){
+            appendLanguagesToList(getSubtitleLanguages(tmdb_example.results));
+        }
+    });
+});
+
+//Gets movie with particular type of language
+function filterByLanguage(dataList, type, language) {
+    return dataList.filter(movie => movie[type].includes(language));
+}
+
+$("#language").on('click', '.menu li', function() {
+    const type_text = $("#type .selected").text().trim();
+    let type = "";
+
+    if (type_text === "Original Language") {
+        type = "original_language";
+    } 
+    else if (type_text === "Dubbing") {
+        type = "dubbed_language";
+    } 
+    else if (type_text === "Subtitles") {
+        type = "subtitles";
+    }
+
+    const language = $(this).text().trim();
+    const dataList = filterByLanguage(tmdb_example.results, type, language);
+    initializeFilter(dataList);
+});
+
+//Filter by sorting
+function sortMoviesByTitle(movies, descending = false) {
+    return movies.sort((a, b) => {
+      if (a.title < b.title) return descending ? 1 : -1;
+      if (a.title > b.title) return descending ? -1 : 1;
+      return 0;
+    });
+}
+
+$("#filter").find(".menu li").each(function() {
+    const type_text = $("#type .selected").text().trim();
+    let type = "";
+
+    if (type_text === "Original Language") {
+        type = "original_language";
+    } 
+    else if (type_text === "Dubbing") {
+        type = "dubbed_language";
+    } 
+    else if (type_text === "Subtitles") {
+        type = "subtitles";
+    }
+
+    const language = $("#language .selected").text().trim();
+
+    let filteredData = filterByLanguage(tmdb_example.results, type, language);
+
+    const option = $(this);
+
+    option.click(function() {
+        const filter = $(this).text().trim();
+
+        let dataList;
+
+        if (filter === "Year Released") {
+            dataList = sortByReleaseDate(filteredData);
+        } else if (filter === "A-Z") {
+            dataList = sortMoviesByTitle(filteredData);
+        } else if (filter === "Z-A") {
+            dataList = sortMoviesByTitle(filteredData, true);
+        }
+
+        // Initialize the filter with the sorted data
+        initializeFilter(dataList);
+    });
+});
