@@ -35,15 +35,16 @@ function getSectionFromHash() {
 function init() {
     $(".ans").hide();
 
-    scrollToSection($("#after-sign-in"));
+    scrollToSection($("#get-started"));
+
+    // scrollToSection($("#accounts"));
     // scrollToSection($("#front-sign-in"));
 
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
 
-    $(".main").hide();
     $(".my-list").hide();
-    // $(".language-filter").hide();
+    $(".language-filter").hide();
 }
 
 $(document).ready(() => {
@@ -749,11 +750,9 @@ $("#language").on('click', '.menu li', function() {
 
     if (type_text === "Original Language") {
         type = "original_language";
-    } 
-    else if (type_text === "Dubbing") {
+    } else if (type_text === "Dubbing") {
         type = "dubbed_language";
-    } 
-    else if (type_text === "Subtitles") {
+    } else if (type_text === "Subtitles") {
         type = "subtitles";
     }
 
