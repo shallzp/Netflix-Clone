@@ -397,7 +397,7 @@ section {
   height: 45px;
 }
 
-#get-started button {
+#get-started .front-nav button {
   border: none;
   background-color: transparent;
   color: #141414;
@@ -406,7 +406,7 @@ section {
   text-decoration: none;
 }
 
-#get-started button:hover {
+#get-started .front-nav :hover {
   text-decoration: underline;
 }
 
@@ -416,25 +416,15 @@ section {
   background-color: #B3B3AD;
 }
 
-.setup {
-  padding: 150px 0;
-}
-
 .steps {
-  max-width: 30vw;
   align-items: center !important;
   margin: auto;
+  margin-bottom: 150px;
   padding: 0;
   color: #232323;
 }
 
-.steps img {
-  width: 300px;
-  margin: 0 55px;
-}
-
 .steps p {
-  text-align: center;
   font-weight: 400;
 }
 
@@ -445,7 +435,6 @@ section {
 .steps h2 {
   font-size: 32px;
   font-weight: 500;
-  text-align: center;
 }
 
 .step-text {
@@ -461,6 +450,67 @@ section {
 .steps .btn span {
   font-size: 24px;
   margin: 10px;
+}
+
+.steps .red.btn:hover {
+  background-color: #fd0d19;
+}
+
+.step-0 {
+  max-width: 340px;
+  margin-top: 150px;
+}
+
+.step-0 img {
+  height: 90px;
+  margin: 0 27px;
+}
+
+.step-0 p, .step-0 h2 {
+  text-align: center;
+}
+
+.step-1 {
+  max-width: 440px;
+  margin-top: 40px;
+}
+
+.step-1 .email-number, .step-1 .password {
+  position: relative;
+}
+
+.step-1 .email-number label, .step-1 .password label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.step-1 .email-number input, .step-1 .password input {
+  background-color: transparent;
+  border: #616161 0.5px solid;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 1.5rem 1rem 0.5rem;
+  width: 100%;
+  height: 56px;
+}
+
+.step-1 .email-number:focus label, .step-1 .password:focus-within label {
+  font-size: 0.8rem;
+  top: 10px;
+}
+
+.invalid {
+  color: #EB3942;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+  padding-top: 10px;
 }
 
 .setup-footer {
@@ -548,6 +598,34 @@ section {
   padding: 0;
   margin: 0;
   padding-top: 10px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 30px;
+  width: 30px;
+  border: #363636 solid 1px;
+  cursor: pointer;
+  background-color: black;
+  position: relative;
+}
+
+input[type="checkbox"]:checked::after {
+  content: url("./images/icons/check.png");
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+p input[type="checkbox"] {
+  position: absolute;
+  top: 437px;
+}
+
+p span {
+  margin-left: 40px;
 }
 
 .sign-btns {
@@ -739,7 +817,7 @@ section {
   display: block;
 }
 
-.kids {
+.drop-options img {
   padding-right: 10px;
 }
 
@@ -1153,13 +1231,274 @@ img.explore-nudge {
   height: 42px;
 }
 
-/* .manage-acc {
-  align-content: center;
-  justify-content: center;
-} */
-
 .manage-acc .heading {
   font-family: Helvetica;
+}
+
+.profiles {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+.user {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.profiles img {
+  width: 180px;
+  border: 5px solid #363636;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+.manage-overlay {
+  position: absolute;
+  z-index: 10;
+}
+
+.manage-overlay img {
+  height: 30px;
+  width: 30px;
+  border: none;
+  top: 145px;
+  right: 70px;
+}
+
+.profiles span {
+  color: #7f7f7f;
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.manage-acc button {
+  background-color: black;
+  border: #363636 2px solid;
+  padding: 10px 30px;
+}
+
+.manage-acc button span {
+  color: #7f7f7f;
+  font-size: 19px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* Add Profile */
+.add-profile {
+  max-width: 40vw;
+  margin: auto;
+  padding: 95px 0;
+  position: relative;
+}
+
+.add-profile .heading, .manage-user .heading {
+  text-align: left;
+}
+
+#manage-profiles .divider {
+  width: 100%;
+  background-color: #363636;
+  height: 1px;
+}
+
+#manage-profiles p {
+  color: #363636;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+#manage-profiles form {
+  padding: 20px 0;
+}
+
+.add-profile .upper {
+  position: absolute;
+  z-index: 20;
+  top: 220px;
+  left: 140px;
+  width: 508px;
+  background-color: #363636;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+
+.upper img {
+  width: 100px;
+}
+
+form .form {
+  position: relative;
+}
+
+.user-img {
+  width: 120px;
+  padding: 20px 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 115px;
+  z-index: 10;
+  width: 25px;
+  height: 25px;
+}
+
+.overlay img {
+  width: 25px;
+}
+
+.profile-name {
+  background-color: #363636;
+  border: none;
+  color: white;
+  width: 300px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 5px;
+  margin: 20px;
+  outline: none;
+}
+
+input[type="checkbox"]:hover {
+  background-color: #232323;
+}
+
+.add-profile input[type="checkbox"] {
+  position: absolute;
+  top: 61px;
+}
+
+.add-profile label {
+  color: white;
+  margin-left: 40px;
+}
+
+.add-profile button, .manage-user button {
+  padding: 5px 20px;
+  margin: 25px;
+  margin-left: 0;
+}
+
+.add-profile button span, .manage-user button span{
+  color: black;
+  font-weight: 550;
+  font-size: 19px;
+}
+
+.add-profiles .white-red, .manage-user .white-red {
+  background-color: white;
+  border: none;
+}
+
+.add-profile:focus-within .white-red {
+  background-color: red;
+  border: none;
+}
+
+.add-profile:focus-within .white-red span {
+  color: white;
+}
+
+.add-profile button.grey, .manage-user button.grey {
+  background-color: black;
+  border: #363636 solid 1px;
+}
+
+.add-profile .grey span, .manage-user .grey span{
+  color: #363636;
+}
+
+button.grey:hover {
+  border: white solid 1px;
+}
+
+
+/* Manage User */
+.manage-user {
+  max-width: 50vw;
+  margin: auto;
+  padding: 90px 0;
+  position: relative;
+}
+
+.manage-user .upper {
+  position: absolute;
+  z-index: 20;
+  top: 175px;
+  left: 140px;
+  width: 508px;
+  background-color: #363636;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+
+.manage-user .form {
+  display: flex;
+}
+
+.manage-user input[type="checkbox"] {
+  position: absolute;
+  top: 16px;
+}
+
+.manage-user .input-div span {
+  margin-left: 40px;
+  color: white;
+}
+
+.manage-user label {
+  color: white;
+  margin-left: 20px;
+}
+
+.acc-dropdown {
+  margin-left: 20px;
+  position: relative;
+}
+
+.acc-dropdown .select {
+  background-color: #141414;
+  color: white;
+  border: white solid 0.1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+
+.acc-dropdown span {
+  margin-left: 0 !important;
+}
+
+#acc-lang {
+  width: 150px;
+}
+
+#allowed {
+  width: 250px;
+  padding-bottom: 40px;
+}
+
+.manage-user:focus-within .white-red {
+  background-color: red;
+  border: none;
+}
+
+.manage-user:focus-within .white-red span {
+  color: white;
 }
 
 

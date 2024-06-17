@@ -14,12 +14,12 @@ function scrollToSection(section, dataCategory = '') {
 
 //Scroll to the section when the hash changes
 //Not opening because of credential login
-//$(window).on('hashchange', function() {
-//    const { section, dataCategory } = getSectionFromHash();
-//    if (section.length) {
-//        scrollToSection(section, dataCategory);
-//    }
-//});
+$(window).on('hashchange', function() {
+   const { section, dataCategory } = getSectionFromHash();
+   if (section.length) {
+       scrollToSection(section, dataCategory);
+   }
+});
 
 function getSectionFromHash() {
     const hash = window.location.hash;
@@ -35,10 +35,10 @@ function getSectionFromHash() {
 function init() {
     $(".ans").hide();
 
-    scrollToSection($("#get-started"));
+    // scrollToSection($("#get-started"));
 
-    // scrollToSection($("#accounts"));
-    // scrollToSection($("#front-sign-in"));
+    // scrollToSection($("#manage-profiles"), "profile-list");
+    scrollToSection($("#front-sign-in"));
 
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
@@ -88,6 +88,10 @@ $(document).ready(() => {
     //});
 }); 
 
+function home() {
+    scrollToSection($("#after-sign-in"));
+}
+
 
 
 
@@ -96,18 +100,22 @@ function signUpBtn() {
     scrollToSection($("#sign-up"));
 }
 
-
-//wrong h email wali id html me chage kari h to wo sahi krna h 
-//dekhna padega pehle konsi id call hui h fr us hisab se dono ke code h
 function getStarted() {
-    var emailValue = $("#email").val().trim();
+    var emailValue1 = $("#email1").val().trim();
+    var emailValue2 = $("#email2").val().trim();
 
-    if (emailValue!== "") {
-        $("#front-sign-in").hide();
-        $("#get-started").show();
+    if (emailValue1 !== "" || emailValue2 !== "") {
+        scrollToSection($("#get-started"));
+        return true;
     } 
     else {
-        $("#email").focus();
+        if (emailValue1 === "") {
+            $("#email1").focus();
+        } 
+        else {
+            $("#email2").focus();
+        }
+        return false;
     }
 }
 
@@ -197,6 +205,17 @@ function validateSignUp() {
 
 //Navigation
 $(".dropdown").click(() => {
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        const dropHTML = `
+        <li class="drop-options"> 
+            <img src="${currentUser.profiles[i].profile_pic}">
+            ${currentUser.profiles[i].name}    
+        </li>
+        `; 
+
+        $(".drop-options.manage").before(dropHTML);
+    }
+
     $(".dropdown-content").toggleClass("menu-toggle");
 });
 
@@ -807,3 +826,160 @@ $("#filter").find(".menu li").each(function() {
         initializeFilter(dataList);
     });
 });
+
+
+//Manage Profiles
+function profileInit() {
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        const profileHTML = `
+        <div class="user">
+            <img src=${currentUser.profiles[i].profile_pic}>
+            <span>${currentUser.profiles[i].name}</span>
+            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
+                <img src="./images/icons/edit.png">
+            </div>
+        </div>`; 
+        
+        $(".add-profile-icon").before(profileHTML);
+    }
+}
+
+function profilePage() {
+    scrollToSection($("#manage-profiles"), "profile-list");
+    profileInit();
+    $(".profile-list").show();
+    $(".manage-user").hide();
+    $(".add-profile").hide();
+}
+
+
+//Opens add profile page
+function addProfile() {
+    scrollToSection($("#manage-profiles"), "add-profile");
+    $(".profile-list").hide();
+    $(".add-profile").show();
+}
+
+function createProfile() {
+    const profile_name = $(".profile-name").val();
+    const profile_pic = $("form .user-img").attr("src");
+    const isKid = $(".kid-profile").is(":checked");
+
+    const newProfile = {
+        name : profile_name,
+        kid : isKid,
+        language : "English",
+        allowed: isKid ? "Kids Content" : "All Maturity levels",
+        profile_pic : profile_pic,
+        active : false
+    }
+
+    const profileHTML = `
+        <div class="user">
+            <img src=${profile_pic}>
+            <span>${profile_name}</span>
+            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
+                <img src="./images/icons/edit.png">
+            </div>
+        </div>`;
+
+    if(profile_name !== "") {
+        currentUser.profiles.push(newProfile);
+        $(".add-profile-icon").before(profileHTML);
+
+        localStorage.setItem('user_data', JSON.stringify(user_data));
+
+        console.log(user_data.users.profiles);
+
+        back();
+        return true;
+    }
+
+    return false;
+}
+
+//Manage user
+function manageProfile() {
+    $(".manage-overlay").show();
+}
+
+function manageUser(img) {
+    const name = $(img).prev("span").text().trim();
+
+    scrollToSection($("#manage-profiles"), "manage-user");
+    $(".profile-list").hide();
+    $(".manage-user").show();
+
+    let current_profile = null;
+
+    for (let i = 0; i < currentUser.profiles.length; i++) {
+        if (currentUser.profiles[i].name === name) {
+            current_profile = currentUser.profiles[i];
+            break;
+        }
+    }
+
+    if (current_profile) {
+        $(".manage-user .profile-name").val(current_profile.name);
+        $("#acc-lang .selected").text(current_profile.language);
+        $("#allowed .selected").text(current_profile.allowed);
+        $(".manage-user .user-img").prop("src", current_profile.profile_pic);
+        if(current_profile.kid === true) {
+            $(".manage-user .kid-profile").prop("checked", true);
+        }
+    }
+}
+
+
+const acc_drop = $(".acc-dropdown");
+acc_drop.each(function() {
+    const dropdown = $(this);
+
+    dropdown.find(".select").click(function() {
+        $(this).toggleClass("select-clicked");
+        dropdown.find(".menu").toggleClass("menu-open");
+    });
+
+    dropdown.find(".menu li").each(function() {
+        const option = $(this);
+
+        option.click(function() {
+            dropdown.find(".selected").text($(this).text());
+            dropdown.find(".select").removeClass("select-clicked");
+            dropdown.find(".menu").removeClass("menu-open");
+        
+            dropdown.find(".menu li").removeClass("dropdown-active");
+            option.addClass("dropdown-active");
+        });
+    });
+});
+
+function editProfile() {}
+
+function deleteProfile() {
+
+}
+
+
+//For change in profile-pic
+function profileLogo(upper) {
+    $(upper).show();
+}
+
+
+// not working
+function changePicture(img) {
+    const source = $(img).attr("src");
+    const form = $(img).closest("div");
+    form.find(".user-img").attr("src", source);
+    $(".upper").hide();
+}
+
+
+//Back
+function back() {
+    scrollToSection($("#manage-profiles"), "profile-list");
+    $(".profile-list").show();
+    $(".manage-user").hide();
+    $(".add-profile").hide();   
+}

@@ -197,14 +197,32 @@
         </div>
         <div class="divider"></div>
         <div class="setup">
-            <div class="steps">
+            <div class="steps step-0">
                 <img src="./images/step-1.png">
                 <p class="step-no">STEP 1 OF 4</p>
                 <h2>Finsh setting up your account</h2>
                 <p class="step-text">Netflix is personalised for you.</p>
                 <p class="step-text">Create a password to watch on any device at any time.</p>
-                <button class="red btn"><span>Next</span></button>
+                <button class="next red btn"><span>Next</span></button>
             </div>
+            <form class="steps step-1">
+                <p class="step-no">STEP 1 OF 4</p>
+                <h2>Create a password to start your membership</h2>
+                <p class="step-text">Just a few more steps and you're done!<br>We hate paperwork, too.</p>
+                <div class="email-number">
+                    <label>Email or mobile number</label>
+                    <input id="login-email" class="transparent btn" type="text">
+                    <p class="invalid email-error" style="display: none;">Please enter a valid email address or phone number.</p>
+                </div>
+                <br>
+                <div class="password">
+                    <label>Password</label>
+                    <input id="login-password" class="transparent btn" type="password">
+                    <p class="invalid pass-error" style="display: none;">Password is required.</p>
+                </div>
+                <br>
+                <button class="next red btn"><span>Next</span></button>
+            </form>
         </div>
         <div class="divider"></div>
         <div class="setup-footer">
@@ -271,7 +289,7 @@
     
                     <center><p><a href="#" class="forgot-pass">Forgot password?</a></p></center>
     
-                    <p> <input type="checkbox" id="remember-me"> Remember me</p>
+                    <p> <input type="checkbox" id="remember-me"> <span>Remember me</span></p>
     
                     <p class="grey-text">New to Netflix? <a href="#" class="sign-up-now">Sign up now.</a></p>
     
@@ -316,7 +334,7 @@
         <div id="header" class="">
             <nav class="navbar container">
                 <div class="navbar-logo">
-                    <img src="./images/netflix_logo.png" class="netflix-logo">
+                    <img src="./images/netflix_logo.png" class="netflix-logo" onclick="home()">
                 </div>
                 <div class="nav-main">
                     <ul>
@@ -332,12 +350,11 @@
                     <ul>
                         <li class="nav-right-item"><img src="./images/icons/search.png" class="search"></li>
                         <li class="nav-right-item"><img src="./images/icons/bell.png" class="bell-notification"></li>
-                        <li class="nav-right-item"><img src="./images/icons/user.png" class="user"></li>
+                        <li class="nav-right-item"><img src="./images/profiles/10.png" class="user"></li>
                         <li class="nav-right-item center dropdown"><img src="./images/icons/dropdown.png" class="dropdown-img">
                             <div class="dropdown-content">
                                 <ul>
-                                    <li class="drop-options"><img src="./images/kids.jpeg" class="kids">Kids</li>
-                                    <li class="drop-options">Manage Profile</li>
+                                    <li class="drop-options manage" onclick="profilePage()">Manage Profile</li>
                                     <hr width="100%">
                                     <li class="drop-options">Account</li>
                                     <li class="drop-options">Help Centre</li>
@@ -464,27 +481,123 @@
     </div>
 
 
-    <div id="accounts">
-        <div class="logo-nav">
-            <img src="./images/netflix_logo.png">
-        </div>
-        <div class="manage-acc container">
-            <h1 class="heading">Who's watching?</h1>
-            <div class="accounts">
-                <div class="user1">
-                    <img src="./images/icons/user.png">
-                    <span>User Name</span>
+    <div id="manage-profiles">
+        <div class="profile-list">
+            <div class="logo-nav">
+                <img src="./images/netflix_logo.png" onclick="home()">
+            </div>
+            <div class="manage-acc container">
+                <h1 class="heading">Who's watching?</h1>
+                <div class="profiles">
+                    <div class="user add-profile-icon">
+                        <img src="./images/icons/add-profile.png" onclick="addProfile()">
+                        <span>Add Profile</span>
+                    </div>
                 </div>
-                <div class="user-kid">
-                    <img src="./images/kids.jpeg">
-                    <span>Kids</span>
-                </div>
-                <div class="add-profile">
-                    <img src="./images/icons/add.png">
-                </div>
+                <center><button type="button" onclick="manageProfile()"><span>MANAGE PROFILES</span></button></center>
             </div>
         </div>
+
+        <div class="add-profile">
+            <h1 class="heading">Add Profile</h1>
+            <div class="divider"></div>
+            <p>Add a profile for another person watching Netfilx.</p>
+
+            <div class="upper" style="display: none;"> 
+                <img src="./images/profiles/1.png" onclick="changePicture(this)">
+                <img src="./images/profiles/2.png" onclick="changePicture(this)">
+                <img src="./images/profiles/3.png" onclick="changePicture(this)">
+                <img src="./images/profiles/4.png" onclick="changePicture(this)">
+                <img src="./images/profiles/5.png" onclick="changePicture(this)">
+                <img src="./images/profiles/6.png" onclick="changePicture(this)">
+                <img src="./images/profiles/7.png" onclick="changePicture(this)">
+                <img src="./images/profiles/8.png" onclick="changePicture(this)">
+                <img src="./images/profiles/9.png" onclick="changePicture(this)">
+                <img src="./images/profiles/10.png" onclick="changePicture(this)">
+            </div>
+
+            <form onsubmit="return createProfile()">
+                <div class="form">
+                    <img src="./images/profiles/1.png" class="user-img">
+                    <div class="overlay" onclick="profileLogo($('.add-profile .upper'))"> <img src="./images/icons/edit.png"> </div>
+                    <input type="text" class="profile-name">
+                    <input type="checkbox" class="kid-profile"> <label>Kid?</label>
+                </div>
+                <div>
+                    <button class="white-red" type="submit"><span>CONTINUE</span></button>
+                    <button class="grey" type="button" onclick="back()"><span>CANCEL</span></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="manage-user">
+            <h1 class="heading">Edit Profile</h1>
+            <div class="divider"></div>
+            
+            <div class="upper" style="display: none;"> 
+                <img src="./images/profiles/1.png" onclick="changePicture(this)">
+                <img src="./images/profiles/2.png" onclick="changePicture(this)">
+                <img src="./images/profiles/3.png" onclick="changePicture(this)">
+                <img src="./images/profiles/4.png" onclick="changePicture(this)">
+                <img src="./images/profiles/5.png" onclick="changePicture(this)">
+                <img src="./images/profiles/6.png" onclick="changePicture(this)">
+                <img src="./images/profiles/7.png" onclick="changePicture(this)">
+                <img src="./images/profiles/8.png" onclick="changePicture(this)">
+                <img src="./images/profiles/9.png" onclick="changePicture(this)">
+                <img src="./images/profiles/10.png" onclick="changePicture(this)">
+            </div>
+
+            <form onsubmit="editProfile()">
+                <div class="form">
+                    <div class="profile-pic">
+                        <img src="./images/profiles/1.png" class="user-img">
+                        <div class="overlay" onclick="profileLogo($('.manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
+                    </div>
+                    <div class="input-div">
+                        <input type="text" class="profile-name">
+                        <input type="checkbox" class="kid-profile"> <span>Kid?</span> <br>
+                        <label>Language:</label> <br>
+                        <div class="acc-dropdown" id="acc-lang">
+                            <div class="select">
+                                <span class="selected">English</span>
+                                <div class="caret"></div>    
+                            </div>
+                            <ul class="menu">
+                                <li>English</li>
+                                <li>Hindi</li>
+                                <li>Korean</li>
+                            </ul>
+                        </div>
+                        <br>
+                        <label>Allowed TV shows and movies:</label> <br>
+                        <div class="acc-dropdown" id="allowed">
+                            <div class="select">
+                                <span class="selected">All Maturity levels</span>
+                                <div class="caret"></div>    
+                            </div>
+                            <ul class="menu">
+                                <li>For Little Kids only</li>
+                                <li>For Older Kids and below</li>
+                                <li>For Teens and below</li>
+                                <li>All Maturity levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div>
+                    <button class="white-red" type="submit"><span>SAVE</span></button>
+                    <button class="grey" onclick="back()"><span>CANCEL</span></button>
+                    <button class="grey" type="button" onclick="deleteProfile()"><span>DELETE PROFILE</span></button>
+                </div>
+            </form>
+        </div>
     </div>
+
+
+
     
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script type="Text/JavaScript" src="./data/user.js"></script>
