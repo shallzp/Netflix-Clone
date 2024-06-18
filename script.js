@@ -36,8 +36,6 @@ function init() {
     $(".ans").hide();
 
     // scrollToSection($("#get-started"));
-
-    // scrollToSection($("#manage-profiles"), "profile-list");
     scrollToSection($("#front-sign-in"));
 
     fetchAndBuildAllSections(tmdb_example, genre_data);
@@ -187,6 +185,7 @@ function validateSignUp() {
             }
             scrollToSection($("#after-sign-in"));
             initializeButtons();
+            activeProfile();
             return true;
         } 
         else {
@@ -205,19 +204,27 @@ function validateSignUp() {
 
 //Navigation
 $(".dropdown").click(() => {
-    for(var i = 0; i < currentUser.profiles.length; i++) {
-        const dropHTML = `
-        <li class="drop-options"> 
-            <img src="${currentUser.profiles[i].profile_pic}">
-            ${currentUser.profiles[i].name}    
-        </li>
-        `; 
+    for (var i = 0; i < currentUser.profiles.length; i++) {
+        const profilePic = currentUser.profiles[i].profile_pic;
+        const profileName = currentUser.profiles[i].name;
 
-        $(".drop-options.manage").before(dropHTML);
+        if ($(`.drop-options img[src="${profilePic}"]`).length === 0 && 
+            $(`.drop-options span:contains("${profileName}")`).length === 0) {
+
+            const dropHTML = `
+            <li class="drop-options" onclick="setActive(this)"> 
+                <img src="${profilePic}">
+                <span>${profileName}</span>    
+            </li>
+            `;
+
+            $(".drop-options.manage").before(dropHTML);
+        }
     }
 
     $(".dropdown-content").toggleClass("menu-toggle");
 });
+
 
 function getMoviesByCategory(dataList, categoryName) {
     filteredResult = dataList.filter(movie => {
@@ -309,6 +316,36 @@ function clearSections() {
     $('.movie').empty();
     $("#banner-section").css("background-image", "none");
     $('.banner').empty();
+}
+
+
+//Dropdown
+function profilePage() {
+    scrollToSection($("#manage-profiles"), "profile-list");
+    profileInit();
+    $(".profile-list").show();
+    $(".manage-user").hide();
+    $(".add-profile").hide();
+}
+
+function activeProfile() {
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        if(currentUser.profiles[i].active === true) {
+            $(".nav-right-item .user").attr("src", currentUser.profiles[i].profile_pic);
+        }
+    }
+}
+
+function setActive(profile) {
+    const profile_name = $(profile).find("span").text().trim();
+
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        currentUser.profiles[i].active = (profile_name === currentUser.profiles[i].name);
+    }
+
+    localStorage.setItem('user_data', JSON.stringify(user_data));
+
+    activeProfile();
 }
 
 
@@ -844,14 +881,6 @@ function profileInit() {
     }
 }
 
-function profilePage() {
-    scrollToSection($("#manage-profiles"), "profile-list");
-    profileInit();
-    $(".profile-list").show();
-    $(".manage-user").hide();
-    $(".add-profile").hide();
-}
-
 
 //Opens add profile page
 function addProfile() {
@@ -889,14 +918,13 @@ function createProfile() {
 
         localStorage.setItem('user_data', JSON.stringify(user_data));
 
-        console.log(user_data.users.profiles);
-
         back();
         return true;
     }
 
     return false;
 }
+
 
 //Manage user
 function manageProfile() {
@@ -930,7 +958,6 @@ function manageUser(img) {
     }
 }
 
-
 const acc_drop = $(".acc-dropdown");
 acc_drop.each(function() {
     const dropdown = $(this);
@@ -954,24 +981,65 @@ acc_drop.each(function() {
     });
 });
 
-function editProfile() {}
+function editProfile() {
+    const profile_name = $(".manage-user .profile-name").val();
+    const profile_pic = $("form .user-img").attr("src");
+    const isKid = $(".kid-profile").is(":checked");
+    const language = $("#acc-lang .selected").text().trim();
+    const allowed = $("#allowed .selected").text().trim();
+
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        if(profile_name === currentUser.profiles[i].name) {
+            currentUser.profiles[i].name = profile_name;
+            currentUser.profiles[i].kid = isKid;
+            currentUser.profiles[i].language = language;
+            currentUser.profiles[i].allowed = allowed;
+            currentUser.profiles[i].profile_pic = profile_pic;
+            currentUser.profiles[i].active = false;
+
+            localStorage.setItem('user_data', JSON.stringify(user_data));
+
+            back();
+            return true;
+        }
+    }
+
+    return false;
+}
 
 function deleteProfile() {
+    const profile_name = $(".manage-user .profile-name").val();
 
+    for (var i = 0; i < currentUser.profiles.length; i++) {
+        if (profile_name === currentUser.profiles[i].name) {
+            currentUser.profiles.splice(i, 1);
+            break;
+        }
+    }
+    
+    $(".profile-list .user").each(function() {
+        if ($(this).find("span").text().trim() === profile_name) {
+            $(this).remove();
+        }
+    });
+
+    localStorage.setItem('user_data', JSON.stringify(currentUser));
+
+    back();
 }
 
 
+
 //For change in profile-pic
-function profileLogo(upper) {
-    $(upper).show();
+function profileLogo(selector) {
+    $(selector).show();
 }
 
 
 // not working
 function changePicture(img) {
     const source = $(img).attr("src");
-    const form = $(img).closest("div");
-    form.find(".user-img").attr("src", source);
+    $(img).closest("div").next("form").find(".user-img").attr("src", source);
     $(".upper").hide();
 }
 

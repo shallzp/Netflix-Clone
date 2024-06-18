@@ -547,7 +547,7 @@
                 <img src="./images/profiles/10.png" onclick="changePicture(this)">
             </div>
 
-            <form onsubmit="editProfile()">
+            <form onsubmit="return editProfile()">
                 <div class="form">
                     <div class="profile-pic">
                         <img src="./images/profiles/1.png" class="user-img">
@@ -557,6 +557,7 @@
                         <input type="text" class="profile-name">
                         <input type="checkbox" class="kid-profile"> <span>Kid?</span> <br>
                         <label>Language:</label> <br>
+                        <div id="google_translate"></div>
                         <div class="acc-dropdown" id="acc-lang">
                             <div class="select">
                                 <span class="selected">English</span>
@@ -600,10 +601,19 @@
 
     
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script type="Text/JavaScript" src="./data/user.js"></script>
-    <script type="Text/JavaScript" src="./data/genre.js"></script>
-    <script type="Text/JavaScript" src="./data/data.js"></script>
-    <script type="Text/JavaScript" src="./data/api.js"></script>
-    <script type="Text/JavaScript" src="./script.js"></script>
+    <script type="text/JavaScript" src="./data/user.js"></script>
+    <script type="text/JavaScript" src="./data/genre.js"></script>
+    <script type="text/JavaScript" src="./data/data.js"></script>
+    <script type="text/JavaScript" src="./data/api.js"></script>
+    <script type="text/JavaScript" src="./script.js"></script>
+
+    <script>
+        function translatePage() {
+            new google.translate.TranslateElement(
+                'google_translate'
+            );
+        } 
+    </script>
+    <script type="text/JavaScript" src="https://translate.google.com/translate_a/element.js?cb=translatePage"></script>
 </body>
 </html>
