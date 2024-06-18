@@ -525,7 +525,7 @@
                 </div>
                 <div>
                     <button class="white-red" type="submit"><span>CONTINUE</span></button>
-                    <button class="grey" type="button" onclick="back()"><span>CANCEL</span></button>
+                    <button class="grey" type="button" onclick="profilePage()"><span>CANCEL</span></button>
                 </div>
             </form>
         </div>
@@ -550,15 +550,16 @@
             <form onsubmit="return editProfile()">
                 <div class="form">
                     <div class="profile-pic">
-                        <img src="./images/profiles/1.png" class="user-img">
+                        <img src="" class="user-img">
                         <div class="overlay" onclick="profileLogo($('.manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
                     </div>
                     <div class="input-div">
                         <input type="text" class="profile-name">
                         <input type="checkbox" class="kid-profile"> <span>Kid?</span> <br>
                         <label>Language:</label> <br>
-                        <div id="google_translate"></div>
-                        <div class="acc-dropdown" id="acc-lang">
+                        <div class="acc-dropdown" id="google_translate"></div>
+
+                        <!-- <div class="acc-dropdown" id="acc-lang">
                             <div class="select">
                                 <span class="selected">English</span>
                                 <div class="caret"></div>    
@@ -568,7 +569,7 @@
                                 <li>Hindi</li>
                                 <li>Korean</li>
                             </ul>
-                        </div>
+                        </div> -->
                         <br>
                         <label>Allowed TV shows and movies:</label> <br>
                         <div class="acc-dropdown" id="allowed">
@@ -590,7 +591,7 @@
 
                 <div>
                     <button class="white-red" type="submit"><span>SAVE</span></button>
-                    <button class="grey" onclick="back()"><span>CANCEL</span></button>
+                    <button class="grey" onclick="profilePage()"><span>CANCEL</span></button>
                     <button class="grey" type="button" onclick="deleteProfile()"><span>DELETE PROFILE</span></button>
                 </div>
             </form>
@@ -609,10 +610,15 @@
 
     <script>
         function translatePage() {
-            new google.translate.TranslateElement(
-                'google_translate'
-            );
-        } 
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'ar,de,el,en,es,fr,hi,it,ja,ko,nl,pt,ru,th,tr,zh',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            },
+            'google_translate'
+        );
+}
     </script>
     <script type="text/JavaScript" src="https://translate.google.com/translate_a/element.js?cb=translatePage"></script>
 </body>

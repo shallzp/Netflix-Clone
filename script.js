@@ -74,16 +74,6 @@ $(document).ready(() => {
             $("#header").removeClass("black-bg");
         }
     });
-
-    //$('.scroll-left').click(function() {
-    //    var movieRow = $(this).siblings('.movie-row');
-    //    movieRow.scrollLeft(movieRow.scrollLeft() - 100);
-    //});
-    
-    //$('.scroll-right').click(function() {
-    //    var movieRow = $(this).siblings('.movie-row');
-    //    movieRow.scrollLeft(movieRow.scrollLeft() + 100);
-    //});
 }); 
 
 function home() {
@@ -203,29 +193,6 @@ function validateSignUp() {
 //After sign in - Main Netflix
 
 //Navigation
-$(".dropdown").click(() => {
-    for (var i = 0; i < currentUser.profiles.length; i++) {
-        const profilePic = currentUser.profiles[i].profile_pic;
-        const profileName = currentUser.profiles[i].name;
-
-        if ($(`.drop-options img[src="${profilePic}"]`).length === 0 && 
-            $(`.drop-options span:contains("${profileName}")`).length === 0) {
-
-            const dropHTML = `
-            <li class="drop-options" onclick="setActive(this)"> 
-                <img src="${profilePic}">
-                <span>${profileName}</span>    
-            </li>
-            `;
-
-            $(".drop-options.manage").before(dropHTML);
-        }
-    }
-
-    $(".dropdown-content").toggleClass("menu-toggle");
-});
-
-
 function getMoviesByCategory(dataList, categoryName) {
     filteredResult = dataList.filter(movie => {
         if (movie.category.includes(categoryName)) {
@@ -320,6 +287,25 @@ function clearSections() {
 
 
 //Dropdown
+$(".dropdown").click(() => {
+    $(".drop-options.manage").prevAll(".drop-options").remove();
+
+    for (var i = 0; i < currentUser.profiles.length; i++) {
+        const profilePic = currentUser.profiles[i].profile_pic;
+        const profileName = currentUser.profiles[i].name;
+
+        const dropHTML = `
+        <li class="drop-options" onclick="setActive(this)"> 
+            <img src="${profilePic}">
+            <span>${profileName}</span>    
+        </li>`;
+
+        $(".drop-options.manage").before(dropHTML);
+    }
+
+    $(".dropdown-content").toggleClass("menu-toggle");
+});
+
 function profilePage() {
     scrollToSection($("#manage-profiles"), "profile-list");
     profileInit();
@@ -331,7 +317,8 @@ function profilePage() {
 function activeProfile() {
     for(var i = 0; i < currentUser.profiles.length; i++) {
         if(currentUser.profiles[i].active === true) {
-            $(".nav-right-item .user").attr("src", currentUser.profiles[i].profile_pic);
+            currentProfile = currentUser.profiles[i];
+            $(".nav-right-item .user").attr("src", currentProfile.profile_pic);
         }
     }
 }
@@ -444,10 +431,11 @@ function searchMovieTrailer(movieName, iframeId) {
             <iframe width="245px" height="137px" src="https://www.youtube.com/embed/${bestResult.id.videoId}?autoplay=1&controls=0"></iframe>
         </div>`;
 
-        $(`#${iframeId}`).append(movieTrailerHTML);
+        $(`#${iframeId}`).html(movieTrailerHTML);
     })
     .catch(err => console.log(err));
 }
+
 
 //Builds movie item
 function createMovieItem(item) {
@@ -867,6 +855,17 @@ $("#filter").find(".menu li").each(function() {
 
 //Manage Profiles
 function profileInit() {
+    $(".profiles").empty();
+
+    const addProfileHTML = `
+    <div class="user add-profile-icon">
+        <img src="./images/icons/add-profile.png" onclick="addProfile()">
+        <span>Add Profile</span>
+    </div>
+    `;
+
+    $(".profiles").append(addProfileHTML);
+
     for(var i = 0; i < currentUser.profiles.length; i++) {
         const profileHTML = `
         <div class="user">
@@ -879,6 +878,15 @@ function profileInit() {
         
         $(".add-profile-icon").before(profileHTML);
     }
+
+    if ($(".profiles .user").length - 1 >= 5) {
+        $(".add-profile-icon").hide();
+    } 
+    else {
+        $(".add-profile-icon").show();
+    }
+
+    $(".manage-overlay").hide();
 }
 
 
@@ -891,16 +899,19 @@ function addProfile() {
 
 function createProfile() {
     const profile_name = $(".profile-name").val();
-    const profile_pic = $("form .user-img").attr("src");
+    const profile_pic = $(".add-profile form .user-img").attr("src");
     const isKid = $(".kid-profile").is(":checked");
 
     const newProfile = {
         name : profile_name,
         kid : isKid,
         language : "English",
-        allowed: isKid ? "Kids Content" : "All Maturity levels",
+        allowed: isKid ? "For Little Kids only" : "All Maturity levels",
         profile_pic : profile_pic,
-        active : false
+        active : false,
+        watchlist : { results : []},
+        like : { results : []},
+        dislike : { results : []},
     }
 
     const profileHTML = `
@@ -918,7 +929,7 @@ function createProfile() {
 
         localStorage.setItem('user_data', JSON.stringify(user_data));
 
-        back();
+        profilePage();
         return true;
     }
 
@@ -983,23 +994,24 @@ acc_drop.each(function() {
 
 function editProfile() {
     const profile_name = $(".manage-user .profile-name").val();
-    const profile_pic = $("form .user-img").attr("src");
-    const isKid = $(".kid-profile").is(":checked");
-    const language = $("#acc-lang .selected").text().trim();
+    const profile_pic = $(".manage-user form .user-img").attr("src");
+    const isKid = $(".manage-user .kid-profile").is(":checked");
+    // const language = $("#acc-lang .selected").text().trim();
     const allowed = $("#allowed .selected").text().trim();
 
     for(var i = 0; i < currentUser.profiles.length; i++) {
         if(profile_name === currentUser.profiles[i].name) {
             currentUser.profiles[i].name = profile_name;
             currentUser.profiles[i].kid = isKid;
-            currentUser.profiles[i].language = language;
+            // currentUser.profiles[i].language = language;
             currentUser.profiles[i].allowed = allowed;
             currentUser.profiles[i].profile_pic = profile_pic;
             currentUser.profiles[i].active = false;
 
             localStorage.setItem('user_data', JSON.stringify(user_data));
 
-            back();
+            profilePage();
+            $(".manage-overlay").hide();
             return true;
         }
     }
@@ -1025,7 +1037,8 @@ function deleteProfile() {
 
     localStorage.setItem('user_data', JSON.stringify(currentUser));
 
-    back();
+    profilePage();
+    $(".manage-overlay").hide();
 }
 
 
@@ -1035,19 +1048,8 @@ function profileLogo(selector) {
     $(selector).show();
 }
 
-
-// not working
 function changePicture(img) {
     const source = $(img).attr("src");
     $(img).closest("div").next("form").find(".user-img").attr("src", source);
     $(".upper").hide();
-}
-
-
-//Back
-function back() {
-    scrollToSection($("#manage-profiles"), "profile-list");
-    $(".profile-list").show();
-    $(".manage-user").hide();
-    $(".add-profile").hide();   
 }
