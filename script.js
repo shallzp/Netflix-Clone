@@ -37,6 +37,7 @@ function init() {
 
     // scrollToSection($("#get-started"));
     scrollToSection($("#front-sign-in"));
+    // scrollToSection($("#manage-profiles"));
 
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
@@ -77,7 +78,7 @@ $(document).ready(() => {
 }); 
 
 function home() {
-    scrollToSection($("#after-sign-in"));
+    scrollToSection($("#home-page"));
 }
 
 
@@ -173,9 +174,9 @@ function validateSignUp() {
             else {
                 eraseCookie('rememberMe');
             }
-            scrollToSection($("#after-sign-in"));
-            initializeButtons();
-            activeProfile();
+
+            profilePage();
+
             return true;
         } 
         else {
@@ -190,8 +191,239 @@ function validateSignUp() {
 
 
 
-//After sign in - Main Netflix
+//After sign in
 
+//Manage Profiles
+function profileInit() {
+    $(".profiles").empty();
+
+    const addProfileHTML = `
+    <div class="user add-profile-icon">
+        <img src="./images/icons/add-profile.png" onclick="addProfile()">
+        <span>Add Profile</span>
+    </div>
+    `;
+
+    $(".profiles").append(addProfileHTML);
+
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        const profileHTML = `
+        <div class="user person" onclick="currentHome(this)">
+            <img src=${currentUser.profiles[i].profile_pic}>
+            <span>${currentUser.profiles[i].name}</span>
+            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
+                <img src="./images/icons/edit.png">
+            </div>
+        </div>`; 
+        
+        $(".add-profile-icon").before(profileHTML);
+    }
+
+    if ($(".profiles .user").length - 1 >= 5) {
+        $(".add-profile-icon").hide();
+    } 
+    else {
+        $(".add-profile-icon").show();
+    }
+
+    $(".manage-overlay").hide();
+}
+
+function activeProfile() {
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        if(currentUser.profiles[i].active === true) {
+            currentProfile = currentUser.profiles[i];
+            $(".nav-right-item .user").attr("src", currentProfile.profile_pic);
+        }
+    }
+}
+
+function setActive(profile) {
+    const profile_name = $(profile).find("span").text().trim();
+
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        currentUser.profiles[i].active = (profile_name === currentUser.profiles[i].name);
+    }
+
+    localStorage.setItem('user_data', JSON.stringify(user_data));
+
+    activeProfile();
+}
+
+function currentHome(profile) {
+    setActive(profile);
+    scrollToSection($("#home-page"));
+    initializeButtons();
+    activeProfile();
+}
+
+
+//Opens add profile page
+function addProfile() {
+    scrollToSection($("#manage-profiles"), "add-profile");
+    $(".profile-list").hide();
+    $(".add-profile").show();
+}
+
+function createProfile() {
+    const profile_name = $(".profile-name").val();
+    const profile_pic = $(".add-profile form .user-img").attr("src");
+    const isKid = $(".kid-profile").is(":checked");
+
+    const newProfile = {
+        name : profile_name,
+        kid : isKid,
+        language : "English",
+        allowed: isKid ? "For Little Kids only" : "All Maturity levels",
+        profile_pic : profile_pic,
+        active : false,
+        watchlist : { results : []},
+        like : { results : []},
+        dislike : { results : []},
+    }
+
+    const profileHTML = `
+        <div class="user">
+            <img src=${profile_pic}>
+            <span>${profile_name}</span>
+            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
+                <img src="./images/icons/edit.png">
+            </div>
+        </div>`;
+
+    if(profile_name !== "") {
+        currentUser.profiles.push(newProfile);
+        $(".add-profile-icon").before(profileHTML);
+
+        localStorage.setItem('user_data', JSON.stringify(user_data));
+
+        profilePage();
+        return true;
+    }
+
+    return false;
+}
+
+
+//Manage user
+function manageProfile() {
+    $(".manage-overlay").toggle();
+}
+
+function manageUser(img) {
+    const name = $(img).prev("span").text().trim();
+
+    scrollToSection($("#manage-profiles"), "manage-user");
+    $(".profile-list").hide();
+    $(".manage-user").show();
+
+    let current_profile = null;
+
+    for (let i = 0; i < currentUser.profiles.length; i++) {
+        if (currentUser.profiles[i].name === name) {
+            current_profile = currentUser.profiles[i];
+            break;
+        }
+    }
+
+    if (current_profile) {
+        $(".manage-user .profile-name").val(current_profile.name);
+        $("#acc-lang .selected").text(current_profile.language);
+        $("#allowed .selected").text(current_profile.allowed);
+        $(".manage-user .user-img").prop("src", current_profile.profile_pic);
+        if(current_profile.kid === true) {
+            $(".manage-user .kid-profile").prop("checked", true);
+        }
+    }
+}
+
+const acc_drop = $(".acc-dropdown");
+acc_drop.each(function() {
+    const dropdown = $(this);
+
+    dropdown.find(".select").click(function() {
+        $(this).toggleClass("select-clicked");
+        dropdown.find(".menu").toggleClass("menu-open");
+    });
+
+    dropdown.find(".menu li").each(function() {
+        const option = $(this);
+
+        option.click(function() {
+            dropdown.find(".selected").text($(this).text());
+            dropdown.find(".select").removeClass("select-clicked");
+            dropdown.find(".menu").removeClass("menu-open");
+        
+            dropdown.find(".menu li").removeClass("dropdown-active");
+            option.addClass("dropdown-active");
+        });
+    });
+});
+
+function editProfile() {
+    const profile_name = $(".manage-user .profile-name").val();
+    const profile_pic = $(".manage-user form .user-img").attr("src");
+    const isKid = $(".manage-user .kid-profile").is(":checked");
+    // const language = $("#acc-lang .selected").text().trim();
+    const allowed = $("#allowed .selected").text().trim();
+
+    for(var i = 0; i < currentUser.profiles.length; i++) {
+        if(profile_name === currentUser.profiles[i].name) {
+            currentUser.profiles[i].name = profile_name;
+            currentUser.profiles[i].kid = isKid;
+            // currentUser.profiles[i].language = language;
+            currentUser.profiles[i].allowed = allowed;
+            currentUser.profiles[i].profile_pic = profile_pic;
+            currentUser.profiles[i].active = false;
+
+            localStorage.setItem('user_data', JSON.stringify(user_data));
+
+            profilePage();
+            $(".manage-overlay").hide();
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function deleteProfile() {
+    const profile_name = $(".manage-user .profile-name").val();
+
+    for (var i = 0; i < currentUser.profiles.length; i++) {
+        if (profile_name === currentUser.profiles[i].name) {
+            currentUser.profiles.splice(i, 1);
+            break;
+        }
+    }
+    
+    $(".profile-list .user").each(function() {
+        if ($(this).find("span").text().trim() === profile_name) {
+            $(this).remove();
+        }
+    });
+
+    localStorage.setItem('user_data', JSON.stringify(currentUser));
+
+    profilePage();
+    $(".manage-overlay").hide();
+}
+
+
+//For change in profile-pic
+function profileLogo(selector) {
+    $(selector).show();
+}
+
+function changePicture(img) {
+    const source = $(img).attr("src");
+    $(img).closest("div").next("form").find(".user-img").attr("src", source);
+    $(".upper").hide();
+}
+
+
+
+//Main Netflix
 //Navigation
 function getMoviesByCategory(dataList, categoryName) {
     filteredResult = dataList.filter(movie => {
@@ -271,19 +503,30 @@ function filterContent(category) {
         initializeFilter(tmdb_example.results);
     }
 
-    window.location.hash = "after-sign-in" + '?' + category ;
+    window.location.hash = "home-page" + '?' + category ;
     initializeButtons();
 }
 
 function clearSections() {
     $(".my-list").hide();
     $(".language-filter").hide();
+    $(".search-list").hide();
     $(".main").show();
     
     $('.movie').empty();
     $("#banner-section").css("background-image", "none");
     $('.banner').empty();
 }
+
+
+//Search
+$(".search").click(() => {
+    $(".navbar").css("grid-template-columns", "0.1fr 0.7fr 0.2fr");
+    $(".search").hide();
+    $(".search-box").show();
+    $(".main").hide();
+    $(".search-list").show();
+})
 
 
 //Dropdown
@@ -312,27 +555,6 @@ function profilePage() {
     $(".profile-list").show();
     $(".manage-user").hide();
     $(".add-profile").hide();
-}
-
-function activeProfile() {
-    for(var i = 0; i < currentUser.profiles.length; i++) {
-        if(currentUser.profiles[i].active === true) {
-            currentProfile = currentUser.profiles[i];
-            $(".nav-right-item .user").attr("src", currentProfile.profile_pic);
-        }
-    }
-}
-
-function setActive(profile) {
-    const profile_name = $(profile).find("span").text().trim();
-
-    for(var i = 0; i < currentUser.profiles.length; i++) {
-        currentUser.profiles[i].active = (profile_name === currentUser.profiles[i].name);
-    }
-
-    localStorage.setItem('user_data', JSON.stringify(user_data));
-
-    activeProfile();
 }
 
 
@@ -487,9 +709,7 @@ function Hover() {
         for (var i = 0; i < tmdb_example.results.length; i++) {
             if (tmdb_example.results[i].id === movieId) {
                 movieName = tmdb_example.results[i].title;
-                setTimeout(() => {
-                    searchMovieTrailer(movieName, `yt${movieId}`);
-                }, 3000);
+                searchMovieTrailer(movieName, `yt${movieId}`);
             }
         }
     }, noHover);
@@ -851,205 +1071,3 @@ $("#filter").find(".menu li").each(function() {
         initializeFilter(dataList);
     });
 });
-
-
-//Manage Profiles
-function profileInit() {
-    $(".profiles").empty();
-
-    const addProfileHTML = `
-    <div class="user add-profile-icon">
-        <img src="./images/icons/add-profile.png" onclick="addProfile()">
-        <span>Add Profile</span>
-    </div>
-    `;
-
-    $(".profiles").append(addProfileHTML);
-
-    for(var i = 0; i < currentUser.profiles.length; i++) {
-        const profileHTML = `
-        <div class="user">
-            <img src=${currentUser.profiles[i].profile_pic}>
-            <span>${currentUser.profiles[i].name}</span>
-            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
-                <img src="./images/icons/edit.png">
-            </div>
-        </div>`; 
-        
-        $(".add-profile-icon").before(profileHTML);
-    }
-
-    if ($(".profiles .user").length - 1 >= 5) {
-        $(".add-profile-icon").hide();
-    } 
-    else {
-        $(".add-profile-icon").show();
-    }
-
-    $(".manage-overlay").hide();
-}
-
-
-//Opens add profile page
-function addProfile() {
-    scrollToSection($("#manage-profiles"), "add-profile");
-    $(".profile-list").hide();
-    $(".add-profile").show();
-}
-
-function createProfile() {
-    const profile_name = $(".profile-name").val();
-    const profile_pic = $(".add-profile form .user-img").attr("src");
-    const isKid = $(".kid-profile").is(":checked");
-
-    const newProfile = {
-        name : profile_name,
-        kid : isKid,
-        language : "English",
-        allowed: isKid ? "For Little Kids only" : "All Maturity levels",
-        profile_pic : profile_pic,
-        active : false,
-        watchlist : { results : []},
-        like : { results : []},
-        dislike : { results : []},
-    }
-
-    const profileHTML = `
-        <div class="user">
-            <img src=${profile_pic}>
-            <span>${profile_name}</span>
-            <div class="manage-overlay" style="display: none;" onclick="manageUser(this)">
-                <img src="./images/icons/edit.png">
-            </div>
-        </div>`;
-
-    if(profile_name !== "") {
-        currentUser.profiles.push(newProfile);
-        $(".add-profile-icon").before(profileHTML);
-
-        localStorage.setItem('user_data', JSON.stringify(user_data));
-
-        profilePage();
-        return true;
-    }
-
-    return false;
-}
-
-
-//Manage user
-function manageProfile() {
-    $(".manage-overlay").show();
-}
-
-function manageUser(img) {
-    const name = $(img).prev("span").text().trim();
-
-    scrollToSection($("#manage-profiles"), "manage-user");
-    $(".profile-list").hide();
-    $(".manage-user").show();
-
-    let current_profile = null;
-
-    for (let i = 0; i < currentUser.profiles.length; i++) {
-        if (currentUser.profiles[i].name === name) {
-            current_profile = currentUser.profiles[i];
-            break;
-        }
-    }
-
-    if (current_profile) {
-        $(".manage-user .profile-name").val(current_profile.name);
-        $("#acc-lang .selected").text(current_profile.language);
-        $("#allowed .selected").text(current_profile.allowed);
-        $(".manage-user .user-img").prop("src", current_profile.profile_pic);
-        if(current_profile.kid === true) {
-            $(".manage-user .kid-profile").prop("checked", true);
-        }
-    }
-}
-
-const acc_drop = $(".acc-dropdown");
-acc_drop.each(function() {
-    const dropdown = $(this);
-
-    dropdown.find(".select").click(function() {
-        $(this).toggleClass("select-clicked");
-        dropdown.find(".menu").toggleClass("menu-open");
-    });
-
-    dropdown.find(".menu li").each(function() {
-        const option = $(this);
-
-        option.click(function() {
-            dropdown.find(".selected").text($(this).text());
-            dropdown.find(".select").removeClass("select-clicked");
-            dropdown.find(".menu").removeClass("menu-open");
-        
-            dropdown.find(".menu li").removeClass("dropdown-active");
-            option.addClass("dropdown-active");
-        });
-    });
-});
-
-function editProfile() {
-    const profile_name = $(".manage-user .profile-name").val();
-    const profile_pic = $(".manage-user form .user-img").attr("src");
-    const isKid = $(".manage-user .kid-profile").is(":checked");
-    // const language = $("#acc-lang .selected").text().trim();
-    const allowed = $("#allowed .selected").text().trim();
-
-    for(var i = 0; i < currentUser.profiles.length; i++) {
-        if(profile_name === currentUser.profiles[i].name) {
-            currentUser.profiles[i].name = profile_name;
-            currentUser.profiles[i].kid = isKid;
-            // currentUser.profiles[i].language = language;
-            currentUser.profiles[i].allowed = allowed;
-            currentUser.profiles[i].profile_pic = profile_pic;
-            currentUser.profiles[i].active = false;
-
-            localStorage.setItem('user_data', JSON.stringify(user_data));
-
-            profilePage();
-            $(".manage-overlay").hide();
-            return true;
-        }
-    }
-
-    return false;
-}
-
-function deleteProfile() {
-    const profile_name = $(".manage-user .profile-name").val();
-
-    for (var i = 0; i < currentUser.profiles.length; i++) {
-        if (profile_name === currentUser.profiles[i].name) {
-            currentUser.profiles.splice(i, 1);
-            break;
-        }
-    }
-    
-    $(".profile-list .user").each(function() {
-        if ($(this).find("span").text().trim() === profile_name) {
-            $(this).remove();
-        }
-    });
-
-    localStorage.setItem('user_data', JSON.stringify(currentUser));
-
-    profilePage();
-    $(".manage-overlay").hide();
-}
-
-
-
-//For change in profile-pic
-function profileLogo(selector) {
-    $(selector).show();
-}
-
-function changePicture(img) {
-    const source = $(img).attr("src");
-    $(img).closest("div").next("form").find(".user-img").attr("src", source);
-    $(".upper").hide();
-}

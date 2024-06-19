@@ -14,10 +14,7 @@ user_data = { users : [{
         language : "English",
         allowed : "All Maturity levels",
         profile_pic : "./images/profiles/10.png",
-        active : true,
-        watchlist : { results : []},
-        like : { results : []},
-        dislike : { results : []},
+        active : true
     },
     {
         name : "Kid",
@@ -25,9 +22,6 @@ user_data = { users : [{
         language : "English",
         allowed : "For Little Kid only",
         profile_pic : "./images/profiles/11.jpeg",
-        active : false,
-        watchlist : { results : []},
-        like : { results : []},
-        dislike : { results : []},
+        active : false
     }]
 }]};

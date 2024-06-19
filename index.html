@@ -330,7 +330,126 @@
     </div>
 
 
-    <div id="after-sign-in">
+    <div id="manage-profiles">
+        <div class="profile-list">
+            <div class="logo-nav">
+                <img src="./images/netflix_logo.png">
+                <!-- <button onclick="home()"><span>Done</span></button> -->
+            </div>
+            <div class="manage-acc container">
+                <center><h1 class="heading">Who's watching?</h1></center>
+                <div class="profiles">
+                    <div class="user add-profile-icon">
+                        <img src="./images/icons/add-profile.png" onclick="addProfile()">
+                        <span>Add Profile</span>
+                    </div>
+                </div>
+                <center><button type="button" onclick="manageProfile()"><span>MANAGE PROFILES</span></button></center>
+            </div>
+        </div>
+
+        <div class="add-profile">
+            <h1 class="heading">Add Profile</h1>
+            <div class="divider"></div>
+            <p>Add a profile for another person watching Netfilx.</p>
+
+            <div class="upper" style="display: none;"> 
+                <img src="./images/profiles/1.png" onclick="changePicture(this)">
+                <img src="./images/profiles/2.png" onclick="changePicture(this)">
+                <img src="./images/profiles/3.png" onclick="changePicture(this)">
+                <img src="./images/profiles/4.png" onclick="changePicture(this)">
+                <img src="./images/profiles/5.png" onclick="changePicture(this)">
+                <img src="./images/profiles/6.png" onclick="changePicture(this)">
+                <img src="./images/profiles/7.png" onclick="changePicture(this)">
+                <img src="./images/profiles/8.png" onclick="changePicture(this)">
+                <img src="./images/profiles/9.png" onclick="changePicture(this)">
+                <img src="./images/profiles/10.png" onclick="changePicture(this)">
+            </div>
+
+            <form onsubmit="return createProfile()">
+                <div class="form">
+                    <img src="./images/profiles/1.png" class="user-img">
+                    <div class="overlay" onclick="profileLogo($('.add-profile .upper'))"> <img src="./images/icons/edit.png"> </div>
+                    <input type="text" class="profile-name">
+                    <input type="checkbox" class="kid-profile"> <label>Kid?</label>
+                </div>
+                <div>
+                    <button class="white-red" type="submit"><span>CONTINUE</span></button>
+                    <button class="grey" type="button" onclick="profilePage()"><span>CANCEL</span></button>
+                </div>
+            </form>
+        </div>
+
+        <div class="manage-user">
+            <h1 class="heading">Edit Profile</h1>
+            <div class="divider"></div>
+            
+            <div class="upper" style="display: none;"> 
+                <img src="./images/profiles/1.png" onclick="changePicture(this)">
+                <img src="./images/profiles/2.png" onclick="changePicture(this)">
+                <img src="./images/profiles/3.png" onclick="changePicture(this)">
+                <img src="./images/profiles/4.png" onclick="changePicture(this)">
+                <img src="./images/profiles/5.png" onclick="changePicture(this)">
+                <img src="./images/profiles/6.png" onclick="changePicture(this)">
+                <img src="./images/profiles/7.png" onclick="changePicture(this)">
+                <img src="./images/profiles/8.png" onclick="changePicture(this)">
+                <img src="./images/profiles/9.png" onclick="changePicture(this)">
+                <img src="./images/profiles/10.png" onclick="changePicture(this)">
+            </div>
+
+            <form onsubmit="return editProfile()">
+                <div class="form">
+                    <div class="profile-pic">
+                        <img src="" class="user-img">
+                        <div class="overlay" onclick="profileLogo($('.manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
+                    </div>
+                    <div class="input-div">
+                        <input type="text" class="profile-name">
+                        <input type="checkbox" class="kid-profile"> <span>Kid?</span> <br>
+                        <label>Language:</label> <br>
+                        <div class="acc-dropdown" id="google_translate"></div>
+
+                        <!-- <div class="acc-dropdown" id="acc-lang">
+                            <div class="select">
+                                <span class="selected">English</span>
+                                <div class="caret"></div>    
+                            </div>
+                            <ul class="menu">
+                                <li>English</li>
+                                <li>Hindi</li>
+                                <li>Korean</li>
+                            </ul>
+                        </div> -->
+                        <br>
+                        <label>Allowed TV shows and movies:</label> <br>
+                        <div class="acc-dropdown" id="allowed">
+                            <div class="select">
+                                <span class="selected">All Maturity levels</span>
+                                <div class="caret"></div>    
+                            </div>
+                            <ul class="menu">
+                                <li>For Little Kids only</li>
+                                <li>For Older Kids and below</li>
+                                <li>For Teens and below</li>
+                                <li>All Maturity levels</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div>
+                    <button class="white-red" type="submit"><span>SAVE</span></button>
+                    <button class="grey" onclick="profilePage()"><span>CANCEL</span></button>
+                    <button class="grey" type="button" onclick="deleteProfile()"><span>DELETE PROFILE</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="home-page">
         <div id="header" class="">
             <nav class="navbar container">
                 <div class="navbar-logo">
@@ -348,7 +467,14 @@
                 </div>
                 <div class="nav-right">
                     <ul>
-                        <li class="nav-right-item"><img src="./images/icons/search.png" class="search"></li>
+                        <li class="nav-right-item">
+                            <div class="search-box">
+                                <img src="./images/icons/search.png">
+                                <input type="text">
+                                <img src="./images/icons/cancel.png">
+                            </div>
+                            <img src="./images/icons/search.png" class="search">
+                        </li>
                         <li class="nav-right-item"><img src="./images/icons/bell.png" class="bell-notification"></li>
                         <li class="nav-right-item"><img src="./images/profiles/10.png" class="user"></li>
                         <li class="nav-right-item center dropdown"><img src="./images/icons/dropdown.png" class="dropdown-img">
@@ -478,123 +604,11 @@
             <div class="my-row">
             </div>
         </div>
-    </div>
 
-
-    <div id="manage-profiles">
-        <div class="profile-list">
-            <div class="logo-nav">
-                <img src="./images/netflix_logo.png" onclick="home()">
+        <div class="search container">
+            <p class="search-list"><span>Explore titles related to: </span></p>
+            <div class="my-row">
             </div>
-            <div class="manage-acc container">
-                <h1 class="heading">Who's watching?</h1>
-                <div class="profiles">
-                    <div class="user add-profile-icon">
-                        <img src="./images/icons/add-profile.png" onclick="addProfile()">
-                        <span>Add Profile</span>
-                    </div>
-                </div>
-                <center><button type="button" onclick="manageProfile()"><span>MANAGE PROFILES</span></button></center>
-            </div>
-        </div>
-
-        <div class="add-profile">
-            <h1 class="heading">Add Profile</h1>
-            <div class="divider"></div>
-            <p>Add a profile for another person watching Netfilx.</p>
-
-            <div class="upper" style="display: none;"> 
-                <img src="./images/profiles/1.png" onclick="changePicture(this)">
-                <img src="./images/profiles/2.png" onclick="changePicture(this)">
-                <img src="./images/profiles/3.png" onclick="changePicture(this)">
-                <img src="./images/profiles/4.png" onclick="changePicture(this)">
-                <img src="./images/profiles/5.png" onclick="changePicture(this)">
-                <img src="./images/profiles/6.png" onclick="changePicture(this)">
-                <img src="./images/profiles/7.png" onclick="changePicture(this)">
-                <img src="./images/profiles/8.png" onclick="changePicture(this)">
-                <img src="./images/profiles/9.png" onclick="changePicture(this)">
-                <img src="./images/profiles/10.png" onclick="changePicture(this)">
-            </div>
-
-            <form onsubmit="return createProfile()">
-                <div class="form">
-                    <img src="./images/profiles/1.png" class="user-img">
-                    <div class="overlay" onclick="profileLogo($('.add-profile .upper'))"> <img src="./images/icons/edit.png"> </div>
-                    <input type="text" class="profile-name">
-                    <input type="checkbox" class="kid-profile"> <label>Kid?</label>
-                </div>
-                <div>
-                    <button class="white-red" type="submit"><span>CONTINUE</span></button>
-                    <button class="grey" type="button" onclick="profilePage()"><span>CANCEL</span></button>
-                </div>
-            </form>
-        </div>
-
-        <div class="manage-user">
-            <h1 class="heading">Edit Profile</h1>
-            <div class="divider"></div>
-            
-            <div class="upper" style="display: none;"> 
-                <img src="./images/profiles/1.png" onclick="changePicture(this)">
-                <img src="./images/profiles/2.png" onclick="changePicture(this)">
-                <img src="./images/profiles/3.png" onclick="changePicture(this)">
-                <img src="./images/profiles/4.png" onclick="changePicture(this)">
-                <img src="./images/profiles/5.png" onclick="changePicture(this)">
-                <img src="./images/profiles/6.png" onclick="changePicture(this)">
-                <img src="./images/profiles/7.png" onclick="changePicture(this)">
-                <img src="./images/profiles/8.png" onclick="changePicture(this)">
-                <img src="./images/profiles/9.png" onclick="changePicture(this)">
-                <img src="./images/profiles/10.png" onclick="changePicture(this)">
-            </div>
-
-            <form onsubmit="return editProfile()">
-                <div class="form">
-                    <div class="profile-pic">
-                        <img src="" class="user-img">
-                        <div class="overlay" onclick="profileLogo($('.manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
-                    </div>
-                    <div class="input-div">
-                        <input type="text" class="profile-name">
-                        <input type="checkbox" class="kid-profile"> <span>Kid?</span> <br>
-                        <label>Language:</label> <br>
-                        <div class="acc-dropdown" id="google_translate"></div>
-
-                        <!-- <div class="acc-dropdown" id="acc-lang">
-                            <div class="select">
-                                <span class="selected">English</span>
-                                <div class="caret"></div>    
-                            </div>
-                            <ul class="menu">
-                                <li>English</li>
-                                <li>Hindi</li>
-                                <li>Korean</li>
-                            </ul>
-                        </div> -->
-                        <br>
-                        <label>Allowed TV shows and movies:</label> <br>
-                        <div class="acc-dropdown" id="allowed">
-                            <div class="select">
-                                <span class="selected">All Maturity levels</span>
-                                <div class="caret"></div>    
-                            </div>
-                            <ul class="menu">
-                                <li>For Little Kids only</li>
-                                <li>For Older Kids and below</li>
-                                <li>For Teens and below</li>
-                                <li>All Maturity levels</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="divider"></div>
-
-                <div>
-                    <button class="white-red" type="submit"><span>SAVE</span></button>
-                    <button class="grey" onclick="profilePage()"><span>CANCEL</span></button>
-                    <button class="grey" type="button" onclick="deleteProfile()"><span>DELETE PROFILE</span></button>
-                </div>
-            </form>
         </div>
     </div>
 
