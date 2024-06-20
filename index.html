@@ -27,7 +27,7 @@
                             <img src="./images/icons/dropdown.png">    
                         </span>
                     </button>
-                    <button class="sign-in red btn" onclick="signUpBtn()"><span>Sign In</span></button>
+                    <button class="sign-in red btn" onclick="autoLogin()"><span>Sign In</span></button>
                 </div>
             </div>
             <div class="box"></div>
@@ -262,7 +262,7 @@
         <div class="sign-main">
             <div class="main">
                 <div class="front-nav">
-                    <div class="navbar-logo">
+                    <div class="navbar-logo" onclick="scrollToSection($('#front-sign-in'))">
                         <img src="./images/netflix_logo.png" class="front-netflix-logo">
                     </div>
                 </div>
@@ -331,10 +331,10 @@
 
 
     <div id="manage-profiles">
-        <div class="profile-list">
+        <div id="profile-list">
             <div class="logo-nav">
                 <img src="./images/netflix_logo.png">
-                <!-- <button onclick="home()"><span>Done</span></button> -->
+                <!-- <button onclick="scrollToSection($('#home-page'))"><span>Done</span></button> -->
             </div>
             <div class="manage-acc container">
                 <center><h1 class="heading">Who's watching?</h1></center>
@@ -348,7 +348,7 @@
             </div>
         </div>
 
-        <div class="add-profile">
+        <div id="add-profile">
             <h1 class="heading">Add Profile</h1>
             <div class="divider"></div>
             <p>Add a profile for another person watching Netfilx.</p>
@@ -369,7 +369,7 @@
             <form onsubmit="return createProfile()">
                 <div class="form">
                     <img src="./images/profiles/1.png" class="user-img">
-                    <div class="overlay" onclick="profileLogo($('.add-profile .upper'))"> <img src="./images/icons/edit.png"> </div>
+                    <div class="overlay" onclick="profileLogo($('#add-profile .upper'))"> <img src="./images/icons/edit.png"> </div>
                     <input type="text" class="profile-name">
                     <input type="checkbox" class="kid-profile"> <label>Kid?</label>
                 </div>
@@ -380,7 +380,7 @@
             </form>
         </div>
 
-        <div class="manage-user">
+        <div id="manage-user">
             <h1 class="heading">Edit Profile</h1>
             <div class="divider"></div>
             
@@ -401,7 +401,7 @@
                 <div class="form">
                     <div class="profile-pic">
                         <img src="" class="user-img">
-                        <div class="overlay" onclick="profileLogo($('.manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
+                        <div class="overlay" onclick="profileLogo($('#manage-user .upper'))"> <img src="./images/icons/edit.png"> </div>
                     </div>
                     <div class="input-div">
                         <input type="text" class="profile-name">
@@ -453,7 +453,7 @@
         <div id="header" class="">
             <nav class="navbar container">
                 <div class="navbar-logo">
-                    <img src="./images/netflix_logo.png" class="netflix-logo" onclick="home()">
+                    <img src="./images/netflix_logo.png" class="netflix-logo" onclick="scrollToSection($('#home-page'))">
                 </div>
                 <div class="nav-main">
                     <ul>
@@ -470,7 +470,7 @@
                         <li class="nav-right-item">
                             <div class="search-box">
                                 <img src="./images/icons/search.png">
-                                <input type="text">
+                                <input type="text" id="searchbar" onkeyup="searchMovie()">
                                 <img src="./images/icons/cancel.png">
                             </div>
                             <img src="./images/icons/search.png" class="search">
@@ -484,7 +484,7 @@
                                     <hr width="100%">
                                     <li class="drop-options">Account</li>
                                     <li class="drop-options">Help Centre</li>
-                                    <li class="drop-options">Sign out of Netflix</li>
+                                    <li class="drop-options" onclick="signOut()">Sign out of Netflix</li>
                                 </ul>
                             </div>
                         </li>
@@ -493,7 +493,7 @@
             </nav>
         </div>
     
-        <div class="main">
+        <div id="main">
             <div class="banner" id="banner-section">
             <!-- <div class="banner" id="banner-section" style="background-image: url(./data/banner/avatar-the-last-airbender.jpg);"> -->
                 <!-- <div class="banner-content container">
@@ -504,8 +504,8 @@
                             <button class="action"><img src="./images/icons/play.png">Play</button>
                             <button class="action"><img src="./images/icons/info.png">More Info</button>
                         </div>
-                    </div> -->
-                <div class="banner_fadeBottom"></div>
+                    </div>
+                    <div class="banner_fadeBottom"></div> -->
             </div>
             
             <div class="movie container" id="movie-section">
@@ -550,13 +550,13 @@
             </div>
         </div>
     
-        <div class="my-list container">
+        <div class="my-list container" id="my-list">
             <h2 class="heading">My List</h2>
             <div class="my-row">
             </div>
         </div>
     
-        <div class="language-filter container">
+        <div class="language-filter container" id="browse-language">
             <div class="heading-filter">
                 <div>
                     <h1 class="heading">Browse by Languages</h1>
@@ -605,8 +605,8 @@
             </div>
         </div>
 
-        <div class="search container">
-            <p class="search-list"><span>Explore titles related to: </span></p>
+        <div class="container" id="search">
+            <!-- <p class="search-list"><span>Explore titles related to: </span></p> -->
             <div class="my-row">
             </div>
         </div>

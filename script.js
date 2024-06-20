@@ -1,3 +1,9 @@
+var currentUser = null;
+var currentProfile = null;
+
+
+
+
 //Routing change
 function scrollToSection(section, dataCategory = '') {
     if (section.length) {
@@ -13,7 +19,6 @@ function scrollToSection(section, dataCategory = '') {
 }
 
 //Scroll to the section when the hash changes
-//Not opening because of credential login
 $(window).on('hashchange', function() {
    const { section, dataCategory } = getSectionFromHash();
    if (section.length) {
@@ -35,32 +40,21 @@ function getSectionFromHash() {
 function init() {
     $(".ans").hide();
 
-    // scrollToSection($("#get-started"));
-    scrollToSection($("#front-sign-in"));
-    // scrollToSection($("#manage-profiles"));
-
     fetchAndBuildAllSections(tmdb_example, genre_data);
     setupNavigationFiltering();
 
-    $(".my-list").hide();
-    $(".language-filter").hide();
+    $("#my-list").hide();
+    $("#browse-language").hide();
+    $("#search").hide();
+
+    $(".search").show();
+    $(".search-box").hide();
 }
 
 $(document).ready(() => {
     init();
 
-
-    var rememberMe = getCookie('rememberMe');
-    if (rememberMe) {
-        var credentials = rememberMe.split(':');
-        $('#email-number').val(credentials[0]);
-        $('#password').val(credentials[1]);
-        $('#remember-me').prop('checked', true);
-        currentUser = user_data.users.find(function (user) {
-            return (credentials[0] === user.email || credentials[0] === user.username) && credentials[1] === user.password;
-        });
-    }
-
+    scrollToSection($("#front-sign-in"));
 
     if(localStorage.getItem('user_data')) {
         user_data = JSON.parse(localStorage.getItem('user_data'));
@@ -77,16 +71,34 @@ $(document).ready(() => {
     });
 }); 
 
-function home() {
-    scrollToSection($("#home-page"));
-}
-
 
 
 
 //Front Page
-function signUpBtn() {
-    scrollToSection($("#sign-up"));
+function autoLogin() {
+    var rememberMe = getCookie('rememberMe');
+    if (rememberMe) {
+        var credentials = rememberMe.split(':');
+        $('#email-number').val(credentials[0]);
+        $('#password').val(credentials[1]);
+        $('#remember-me').prop('checked', true);
+        currentUser = user_data.users.find(function (user) {
+            return (credentials[0] === user.email || credentials[0] === user.username) && credentials[1] === user.password;
+        });
+
+        validateSignUp();
+
+        if(currentUser) {
+            for(var i = 0; i < currentUser.profiles.length; i++) {
+                if(currentUser.profiles[i].active === true) {
+                    currentProfile = currentUser.profiles[i];
+                }
+            }
+        }
+    }
+    else {
+        scrollToSection($("#sign-up"));
+    }
 }
 
 function getStarted() {
@@ -141,8 +153,6 @@ function eraseCookie(name) {
     document.cookie = name + '=; Max-Age=-99999999;';  
 }
 
-var currentUser = null;
-
 function validateSignUp() {
     var isValid = true;
 
@@ -195,8 +205,6 @@ function validateSignUp() {
 
 //Manage Profiles
 function profileInit() {
-    $(".profiles").empty();
-
     const addProfileHTML = `
     <div class="user add-profile-icon">
         <img src="./images/icons/add-profile.png" onclick="addProfile()">
@@ -204,7 +212,7 @@ function profileInit() {
     </div>
     `;
 
-    $(".profiles").append(addProfileHTML);
+    $(".profiles").empty().append(addProfileHTML);
 
     for(var i = 0; i < currentUser.profiles.length; i++) {
         const profileHTML = `
@@ -261,13 +269,13 @@ function currentHome(profile) {
 //Opens add profile page
 function addProfile() {
     scrollToSection($("#manage-profiles"), "add-profile");
-    $(".profile-list").hide();
-    $(".add-profile").show();
+    $("#profile-list").hide();
+    $("#add-profile").show();
 }
 
 function createProfile() {
     const profile_name = $(".profile-name").val();
-    const profile_pic = $(".add-profile form .user-img").attr("src");
+    const profile_pic = $("#add-profile form .user-img").attr("src");
     const isKid = $(".kid-profile").is(":checked");
 
     const newProfile = {
@@ -314,8 +322,8 @@ function manageUser(img) {
     const name = $(img).prev("span").text().trim();
 
     scrollToSection($("#manage-profiles"), "manage-user");
-    $(".profile-list").hide();
-    $(".manage-user").show();
+    $("#profile-list").hide();
+    $("#manage-user").show();
 
     let current_profile = null;
 
@@ -327,12 +335,12 @@ function manageUser(img) {
     }
 
     if (current_profile) {
-        $(".manage-user .profile-name").val(current_profile.name);
+        $("#manage-user .profile-name").val(current_profile.name);
         $("#acc-lang .selected").text(current_profile.language);
         $("#allowed .selected").text(current_profile.allowed);
-        $(".manage-user .user-img").prop("src", current_profile.profile_pic);
+        $("#manage-user .user-img").prop("src", current_profile.profile_pic);
         if(current_profile.kid === true) {
-            $(".manage-user .kid-profile").prop("checked", true);
+            $("#manage-user .kid-profile").prop("checked", true);
         }
     }
 }
@@ -361,9 +369,9 @@ acc_drop.each(function() {
 });
 
 function editProfile() {
-    const profile_name = $(".manage-user .profile-name").val();
-    const profile_pic = $(".manage-user form .user-img").attr("src");
-    const isKid = $(".manage-user .kid-profile").is(":checked");
+    const profile_name = $("#manage-user .profile-name").val();
+    const profile_pic = $("#manage-user form .user-img").attr("src");
+    const isKid = $("#manage-user .kid-profile").is(":checked");
     // const language = $("#acc-lang .selected").text().trim();
     const allowed = $("#allowed .selected").text().trim();
 
@@ -388,7 +396,7 @@ function editProfile() {
 }
 
 function deleteProfile() {
-    const profile_name = $(".manage-user .profile-name").val();
+    const profile_name = $("#manage-user .profile-name").val();
 
     for (var i = 0; i < currentUser.profiles.length; i++) {
         if (profile_name === currentUser.profiles[i].name) {
@@ -397,7 +405,7 @@ function deleteProfile() {
         }
     }
     
-    $(".profile-list .user").each(function() {
+    $("#profile-list .user").each(function() {
         if ($(this).find("span").text().trim() === profile_name) {
             $(this).remove();
         }
@@ -491,15 +499,23 @@ function filterContent(category) {
         fetchAndBuildAllSections(data, genre_data);
     }
     else if(category === "my-list") {
-        $(".main").hide();
-        $(".language-filter").hide();
-        $(".my-list").show();
+        $(".search").show();
+        $(".search-box").hide();
+
+        $("#main").hide();
+        $("#browse-language").hide();
+        $("#search").hide();
+        $("#my-list").show();
         initializeWatchlist();
     }
     else if (category === "languages") {
-        $(".main").hide();
-        $(".my-list").hide();
-        $(".language-filter").show();
+        $(".search").show();
+        $(".search-box").hide();
+
+        $("#main").hide();
+        $("#my-list").hide();
+        $("#search").hide();
+        $("#browse-language").show();
         initializeFilter(tmdb_example.results);
     }
 
@@ -508,10 +524,9 @@ function filterContent(category) {
 }
 
 function clearSections() {
-    $(".my-list").hide();
-    $(".language-filter").hide();
-    $(".search-list").hide();
-    $(".main").show();
+    $("#my-list").hide();
+    $("#browse-language").hide();
+    $("#main").show();
     
     $('.movie').empty();
     $("#banner-section").css("background-image", "none");
@@ -521,12 +536,32 @@ function clearSections() {
 
 //Search
 $(".search").click(() => {
-    $(".navbar").css("grid-template-columns", "0.1fr 0.7fr 0.2fr");
+    clearSections();
+
     $(".search").hide();
     $(".search-box").show();
-    $(".main").hide();
-    $(".search-list").show();
-})
+    
+    $("#main").hide();
+    $("#search").show();
+    scrollToSection($("#home-page"), "search-list");
+});
+
+function searchMovie() {
+    let input = $("#searchbar").val().toLowerCase();
+      
+    let searchList = tmdb_example.results.filter(movie => movie.title.toLowerCase().includes(input));
+
+    console.log(searchList);
+    
+    let searchRow = $("#search .my-row");
+
+    const searchListHTML = searchList.map(item => createMovieItem(item)).join('');
+    searchRow.empty().append(searchListHTML);
+
+    // let searchNamesHTML = `${searchList.map(item => item.title).join(' | ')}`;
+    // $("#search p span").empty().append(searchNamesHTML);
+    Hover();
+}
 
 
 //Dropdown
@@ -552,9 +587,14 @@ $(".dropdown").click(() => {
 function profilePage() {
     scrollToSection($("#manage-profiles"), "profile-list");
     profileInit();
-    $(".profile-list").show();
-    $(".manage-user").hide();
-    $(".add-profile").hide();
+    $("#profile-list").show();
+    $("#manage-user").hide();
+    $("#add-profile").hide();
+}
+
+function signOut() {
+    currentUser = null;
+    scrollToSection($("#sign-up"));
 }
 
 
@@ -572,6 +612,7 @@ function buildBanner(movieItem) {
             <button class="action"><img src="./images/icons/info.png">More Info</button>
         </div>
     </div>
+    <div class="banner_fadeBottom"></div> -->
     `;
 
     $("#banner-section").append(bannerSectionHTML);
@@ -724,7 +765,7 @@ function initializeButtons() {
 
 
         //Watchlist
-        var myList = currentUser.watchlist;
+        var myList = currentProfile.watchlist;
 
         var isInMyList = myList.results.some(movie => movie.id == movieId);
 
@@ -737,7 +778,8 @@ function initializeButtons() {
 
 
         //Liked
-        var liked = currentUser.like;
+        var liked = currentProfile.like;
+
 
         var isLiked = liked.results.some(movie => movie.id == movieId);
 
@@ -750,7 +792,8 @@ function initializeButtons() {
 
 
         //Disliked
-        var disliked = currentUser.dislike;
+        var disliked = currentProfile.dislike;
+
 
         var isDisliked = disliked.results.some(movie => movie.id == movieId);
 
@@ -764,9 +807,9 @@ function initializeButtons() {
 }
 
 function initializeWatchlist() {
-    var myList = currentUser.watchlist;
+    var myList = currentProfile.watchlist;
 
-    var myListContainerRow = $('.my-list.container .my-row');
+    var myListContainerRow = $('#my-list.container .my-row');
 
     for (var i = 0; i < myList.results.length; i++) {
         var movieId = myList.results[i].id;
@@ -778,7 +821,7 @@ function initializeWatchlist() {
         }
         else {
             const myListHTML = myList.results.map(item => createMovieItem(item)).join('');
-            $(".my-list.container .my-row").append(myListHTML);
+            $("#my-list.container .my-row").empty().append(myListHTML);
             Hover();
         }
     }
@@ -794,11 +837,11 @@ $(document).on('click', '.access-item[cat="add-to-list"] button', function(event
         return;
     }
 
-    var myList = currentUser.watchlist;
+    var myList = currentProfile.watchlist;
 
     var movieItem = $(this).closest('.movie-item');
     var movieId = movieItem.attr('id');
-    var myListContainerRow = $('.my-list.container .my-row');
+    var myListContainerRow = $('#my-list.container .my-row');
 
     var movieDetails;
     for (var i = 0; i < tmdb_example.results.length; i++) {
@@ -837,7 +880,7 @@ $(document).on('click', '.access-item[cat="like"] button', function(event) {
         return;
     }
 
-    var liked = currentUser.like;
+    var liked = currentProfile.like;
 
     var movieItem = $(this).closest('.movie-item');
     var movieId = movieItem.attr('id');
@@ -874,7 +917,7 @@ $(document).on('click', '.access-item[cat="dislike"] button', function(event) {
         return;
     }
 
-    var disliked = currentUser.dislike;
+    var disliked = currentProfile.dislike;
 
     var movieItem = $(this).closest('.movie-item');
     var movieId = movieItem.attr('id');
@@ -931,11 +974,10 @@ dropdowns.each(function() {
 
 //Appends items in My Row
 function initializeFilter(filterList) {
-    const filterContainerRow = $('.language-filter.container .my-row');
-    filterContainerRow.empty();
+    const filterContainerRow = $('#browse-language.container .my-row');
 
     const filterListHTML = filterList.map(item => createMovieItem(item)).join('');
-    filterContainerRow.append(filterListHTML);
+    filterContainerRow.empty().append(filterListHTML);
     Hover();
 }
 

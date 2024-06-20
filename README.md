@@ -7,7 +7,7 @@ It is a functional and responsive website.
 What can this Website do?
 
 Here's the functions performed by this Clone:
-1. Can create account.
+1. Can create account. !not completed
 2. Can Sign in with account credentials.
 3. Can store Login credentials in cookie for easy login.
 4. Can Play Trailer of the Movie.
@@ -15,7 +15,7 @@ Here's the functions performed by this Clone:
 6. Can like/dislike movies.
 7. Can filter movies by our choice.
 8. Can search movie by its name.
-9. Can manage accounts.
+9. Can manage profiles.
 10. Can change language of website.
 
 
