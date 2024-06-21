@@ -17,6 +17,7 @@ Here's the functions performed by this Clone:
 8. Can search movie by its name.
 9. Can manage profiles.
 10. Can change language of website.
+11. It has dynamic URL.
 
 
 You can see website here : https://shallzp.github.io/3.-Netflix-Clone/
