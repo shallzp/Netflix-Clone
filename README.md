@@ -24,7 +24,7 @@ Work in Progress:
 3. More info about movies.
 4. Responsiveness.
 
-You can see website here : https://shallzp.github.io/3.-Netflix-Clone/
+You can see website here : https://shallzp.github.io/Netflix-Clone/
 
 Note: On clicking you may see that the website is dangerous. It is because of avaibility of login credentials in the code which I may rectify later.
 For viewing click on Details >> Only visit this unsafe site.
