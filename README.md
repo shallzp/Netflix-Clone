@@ -26,7 +26,7 @@ Work in Progress:
 
 You can see website here : https://shallzp.github.io/3.-Netflix-Clone/
 
-Note: On clicking you may see that the website is dangerous.
+Note: On clicking you may see that the website is dangerous. It is because of avaibility of login credentials in the code which I may rectify later.
 For viewing click on Details >> Only visit this unsafe site.
 
 For Login Credentials use :
