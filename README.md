@@ -15,7 +15,7 @@ Here's the functions currently performed by this Clone:
 6. Can filter movies by our choice.
 7. Can search movie by its name.
 8. Can manage profiles.
-9. Can change language of website.
+9. Can change language of website (using Google Translate as of now).
 10. It has dynamic URL.
 
 Work in Progress:
@@ -23,6 +23,7 @@ Work in Progress:
 2. Play video on clicking play button.
 3. More info about movies.
 4. Responsiveness.
+5. Implementation of i18n.
 
 You can see website here : https://shallzp.github.io/Netflix-Clone/
 
