@@ -1,80 +1,287 @@
 {
   "en": {
     "title": "Netflix India – Watch TV Shows Online, Watch Movies Online",
-    "navbar": {
-      "signIn": "Sign In",
-      "language": "English"
-    },
-    "hero": {
-      "heading1": "Unlimited movies, TV shows and more",
-      "heading2": "Watch anywhere. Cancel anytime.",
-      "heading3": "Ready to watch? Enter your email to create or restart your membership."
-    },
-    "form": {
-      "emailLabel": "Email address",
-      "getStarted": "Get Started"
-    },
-    "sections": {
+    
+
+    "front-sign-in": {
+      "main": {
+        "front-nav": {
+          "front-btns": {
+            "language": "English",
+            "sign-in": "Sign In"
+          }
+        },
+        "hero": {
+          "h1": "Unlimited movies, TV shows and more",
+          "h2": "Watch anywhere. Cancel anytime.",
+          "h3": "Ready to watch? Enter your email to create or restart your membership.",
+          "form": {
+            "email": {
+              "label": "Email address"
+            },
+            "button": "Get Started"
+          }
+        }
+      },
+
       "tv": {
-        "heading1": "Enjoy on your TV",
-        "heading2": "Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
+        "h1": "Enjoy on your TV",
+        "h2": "Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more."
       },
+  
       "mobile": {
-        "heading1": "Download your shows to watch offline",
-        "heading2": "Save your favourites easily and always have something to watch."
+        "h1": "Download your shows to watch offline",
+        "h2": "Save your favourites easily and always have something to watch."
       },
+  
       "devices": {
-        "heading1": "Watch everywhere",
-        "heading2": "Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV."
+        "h1": "Watch everywhere",
+        "h2": "Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV."
       },
+  
       "kids": {
-        "heading1": "Create profiles for kids",
-        "heading2": "Send children on adventures with their favourite characters in a space made just for them—free with your membership."
+        "h1": "Create profiles for kids",
+        "h2": "Send children on adventures with their favourite characters in a space made just for them—free with your membership."
+      },
+  
+      "faq": {
+        "h1": "Frequently Asked Questions",
+        "ques-btns": [
+          {
+            "ques": "What is Netflix?",
+            "ans": {
+              "p1": "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries and more – on thousands of internet-connected devices.",
+              "p2": "You can watch as much as you want, whenever you want, without a single ad – all for one low monthly price. There's always something new to discover, and new TV shows and movies are added every week!"
+            }
+          },
+          {
+            "ques": "How much does Netflix cost?",
+            "ans": {
+              "p": "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts."
+            }
+          },
+          {
+            "ques": "Where can I watch?",
+            "ans": {
+              "p1": "Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles.",
+              "p2": "You can also download your favourite shows with the iOS or Android app. Use downloads to watch while you're on the go and without an internet connection. Take Netflix with you anywhere."
+            }
+          },
+          {
+            "ques": "How do I cancel?",
+            "ans": {
+              "p": "Netflix is flexible. There are no annoying contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime."
+            }
+          },
+          {
+            "ques": "What can I watch on Netflix?",
+            "ans": {
+              "p": "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want."
+            }
+          },
+          {
+            "ques": "Is Netflix good for kids?",
+            "ans": {
+              "p1": "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want. Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.",
+              "p2": "Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see."
+            }
+          }
+        ],
+        "hero": {
+            "h3": "Ready to watch? Enter your email to create or restart your membership.",
+            "form": {
+              "email": {
+                "label": "Email address"
+              },
+              "button": "Get Started"
+            }
+          }
+      },
+
+      "footer": {
+        "p": "Questions? Call 000-800-919-1694",
+        "flex-col": {
+          "c-1": {
+            "a1": "FAQ",
+            "a2": "Investor Relations",
+            "a3": "Privacy",
+            "a4": "Speed Test",
+            "language": "English",
+            "p": "Netflix India"
+          },
+          "c-2": {
+            "a1": "Help Centre",
+            "a2": "Jobs",
+            "a3": "Cookie Preferences",
+            "a4": "Legal Notices"
+          },
+          "c-3": {
+            "a1": "Account",
+            "a2": "Ways to Watch",
+            "a3": "Corporate Information",
+            "a4": "Only on Netflix"
+          },
+          "c-4": {
+            "a1": "Media Centre",
+            "a2": "Terms of Use",
+            "a3": "Contact Us"
+          }
+        }
       }
     },
-    "faq": {
-      "heading": "Frequently Asked Questions",
-      "questions": [
-        {
-          "question": "What is Netflix?",
-          "answer": "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries and more – on thousands of internet-connected devices."
+
+
+    "get-started": {},
+
+
+    "sign-up": {},
+
+
+    "manage-profiles": {},
+
+
+    "home-page": {}
+  },
+  "hi": {
+    "title": "Netflix India – टीवी शो ऑनलाइन देखें, फिल्में ऑनलाइन देखें",
+    
+    "front-sign-in": {
+      "main": {
+        "front-nav": {
+          "front-btns": {
+            "language": "अंग्रेज़ी",
+            "sign-in": "साइन इन"
+          }
         },
-        {
-          "question": "How much does Netflix cost?",
-          "answer": "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹149 to ₹649 a month. No extra costs, no contracts."
-        },
-        {
-          "question": "Where can I watch?",
-          "answer": "Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles."
-        },
-        {
-          "question": "How do I cancel?",
-          "answer": "Netflix is flexible. There are no annoying contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime."
-        },
-        {
-          "question": "What can I watch on Netflix?",
-          "answer": "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want."
-        },
-        {
-          "question": "Is Netflix good for kids?",
-          "answer": "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want. Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see."
+        "hero": {
+          "h1": "अनलिमिटेड फिल्में, टीवी शो और बहुत कुछ",
+          "h2": "कहीं भी देखें। कभी भी रद्द करें।",
+          "h3": "देखने के लिए तैयार? अपनी सदस्यता बनाने या पुनः प्रारंभ करने के लिए अपना ईमेल दर्ज करें।",
+          "form": {
+            "email": {
+              "label": "ईमेल पता"
+            },
+            "button": "शुरू करें"
+          }
         }
-      ],
-      "callToAction": "Ready to watch? Enter your email to create or restart your membership."
-    },
-    "footer": {
-      "contact": "Questions? Call 000-800-919-1694",
-      "links": {
-        "faq": "FAQ",
-        "privacy": "Privacy",
-        "helpCentre": "Help Centre",
-        "cookiePreferences": "Cookie Preferences",
-        "termsOfUse": "Terms of Use",
-        "legalNotices": "Legal Notices",
-        "corporateInformation": "Corporate Information",
-        "mediaCentre": "Media Centre"
       },
-      "netflixIndia": "Netflix India"
-    }
+    
+      "tv": {
+        "h1": "अपने टीवी पर आनंद लें",
+        "h2": "स्मार्ट टीवी, प्लेस्टेशन, एक्सबॉक्स, क्रोमकास्ट, एप्पल टीवी, ब्लू-रे प्लेयर और अधिक पर देखें।"
+      },
+    
+      "mobile": {
+        "h1": "अपने शो ऑफ़लाइन देखने के लिए डाउनलोड करें",
+        "h2": "अपने पसंदीदा शो आसानी से सहेजें और देखने के लिए हमेशा कुछ न कुछ रखें।"
+      },
+    
+      "devices": {
+        "h1": "हर जगह देखें",
+        "h2": "अपने फोन, टैबलेट, लैपटॉप और टीवी पर अनलिमिटेड फिल्में और टीवी शो स्ट्रीम करें।"
+      },
+    
+      "kids": {
+        "h1": "बच्चों के लिए प्रोफाइल बनाएं",
+        "h2": "अपने पसंदीदा पात्रों के साथ बच्चों को रोमांच पर भेजें, जो केवल उनके लिए बनाया गया है - आपकी सदस्यता के साथ मुफ़्त।"
+      },
+    
+      "faq": {
+        "h1": "अक्सर पूछे जाने वाले प्रश्न",
+        "ques-btns": [
+          {
+            "ques": "Netflix क्या है?",
+            "ans": {
+              "p1": "Netflix एक स्ट्रीमिंग सेवा है जो पुरस्कार विजेता टीवी शो, फिल्में, एनीमे, वृत्तचित्र और अधिक की विस्तृत विविधता प्रदान करती है - हजारों इंटरनेट से जुड़े उपकरणों पर।",
+              "p2": "आप जितना चाहें देख सकते हैं, जब चाहें देख सकते हैं, बिना किसी विज्ञापन के - केवल एक कम मासिक मूल्य के लिए। हमेशा खोजने के लिए कुछ नया होता है, और हर हफ्ते नए टीवी शो और फिल्में जोड़ी जाती हैं!"
+            }
+          },
+          {
+            "ques": "Netflix की लागत कितनी है?",
+            "ans": {
+              "p": "अपने स्मार्टफोन, टैबलेट, स्मार्ट टीवी, लैपटॉप, या स्ट्रीमिंग डिवाइस पर एक निश्चित मासिक शुल्क पर Netflix देखें। योजनाएँ ₹149 से ₹649 प्रति माह तक होती हैं। कोई अतिरिक्त लागत नहीं, कोई अनुबंध नहीं।"
+            }
+          },
+          {
+            "ques": "मैं कहाँ देख सकता हूँ?",
+            "ans": {
+              "p1": "कहीं भी, कभी भी देखें। तुरंत देखने के लिए अपने व्यक्तिगत कंप्यूटर से या किसी भी इंटरनेट से जुड़े डिवाइस पर netflix.com पर अपने Netflix खाते में साइन इन करें जिसमें Netflix ऐप शामिल है, जिसमें स्मार्ट टीवी, स्मार्टफोन, टैबलेट, स्ट्रीमिंग मीडिया प्लेयर और गेम कंसोल शामिल हैं।",
+              "p2": "आप अपने पसंदीदा शो को iOS या Android ऐप के साथ भी डाउनलोड कर सकते हैं। जब आप यात्रा कर रहे हों और बिना इंटरनेट कनेक्शन के देखने के लिए डाउनलोड का उपयोग करें। Netflix को अपने साथ कहीं भी ले जाएं।"
+            }
+          },
+          {
+            "ques": "मैं कैसे रद्द करूँ?",
+            "ans": {
+              "p": "Netflix लचीला है। कोई परेशान करने वाले अनुबंध और कोई प्रतिबद्धता नहीं है। आप दो क्लिक में अपना खाता ऑनलाइन आसानी से रद्द कर सकते हैं। कोई रद्दीकरण शुल्क नहीं है – कभी भी अपना खाता प्रारंभ या बंद करें।"
+            }
+          },
+          {
+            "ques": "मैं Netflix पर क्या देख सकता हूँ?",
+            "ans": {
+              "p": "Netflix में फीचर फिल्में, वृत्तचित्र, टीवी शो, एनीमे, पुरस्कार विजेता Netflix ओरिजिनल्स, और बहुत कुछ की विस्तृत लाइब्रेरी है। जितना चाहें देख सकते हैं, जब चाहें देख सकते हैं।"
+            }
+          },
+          {
+            "ques": "क्या Netflix बच्चों के लिए अच्छा है?",
+            "ans": {
+              "p1": "Netflix में फीचर फिल्में, वृत्तचित्र, टीवी शो, एनीमे, पुरस्कार विजेता Netflix ओरिजिनल्स, और बहुत कुछ की विस्तृत लाइब्रेरी है। जितना चाहें देख सकते हैं, जब चाहें देख सकते हैं। बच्चों की प्रोफाइल में PIN-संरक्षित माता-पिता नियंत्रण होते हैं जो आपको बच्चों को देखने के लिए सामग्री की परिपक्वता रेटिंग को प्रतिबंधित करने और विशिष्ट शीर्षकों को अवरुद्ध करने की अनुमति देते हैं।",
+              "p2": "बच्चों की प्रोफाइल में PIN-संरक्षित माता-पिता नियंत्रण होते हैं जो आपको बच्चों को देखने के लिए सामग्री की परिपक्वता रेटिंग को प्रतिबंधित करने और विशिष्ट शीर्षकों को अवरुद्ध करने की अनुमति देते हैं।"
+            }
+          }
+        ],
+        "hero": {
+          "h3": "देखने के लिए तैयार? अपनी सदस्यता बनाने या पुनः प्रारंभ करने के लिए अपना ईमेल दर्ज करें।",
+          "form": {
+            "email": {
+              "label": "ईमेल पता"
+            },
+            "button": "शुरू करें"
+          }
+        }
+      },
+    
+      "footer": {
+        "p": "प्रश्न? 000-800-919-1694 पर कॉल करें",
+        "flex-col": {
+          "c-1": {
+            "a1": "FAQ",
+            "a2": "निवेशक संबंध",
+            "a3": "गोपनीयता",
+            "a4": "स्पीड टेस्ट",
+            "language": "अंग्रेज़ी",
+            "p": "Netflix इंडिया"
+          },
+          "c-2": {
+            "a1": "सहायता केंद्र",
+            "a2": "नौकरियां",
+            "a3": "कुकी प्राथमिकताएँ",
+            "a4": "कानूनी नोटिस"
+          },
+          "c-3": {
+            "a1": "खाता",
+            "a2": "देखने के तरीके",
+            "a3": "कॉर्पोरेट जानकारी",
+            "a4": "केवल Netflix पर"
+          },
+          "c-4": {
+            "a1": "मीडिया केंद्र",
+            "a2": "उपयोग की शर्तें",
+            "a3": "हमसे संपर्क करें"
+          }
+        }
+      }
+    },
+    
+
+    "get-started": {},
+
+
+    "sign-up": {},
+
+
+    "manage-profiles": {},
+
+
+    "home-page": {}
   }
 }
