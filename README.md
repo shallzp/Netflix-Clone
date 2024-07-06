@@ -32,3 +32,5 @@ For viewing click on Details >> Only visit this unsafe site.
 
 For Login Credentials use :
 Email - test123@gmail.com, Pass - test@123
+
+Note: I've used some of their pages for linking in footer section.
