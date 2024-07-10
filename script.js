@@ -345,6 +345,15 @@ function manageUser(img) {
     }
 }
 
+$(document).on('click', '.manage-overlay', function (event) {
+    event.stopPropagation();
+    manageUser(this);
+});
+
+$(document).on('click', '.user:not(.add-profile-icon)', function () {
+    currentHome(this);
+});
+
 const acc_drop = $(".acc-dropdown");
 acc_drop.each(function() {
     const dropdown = $(this);
