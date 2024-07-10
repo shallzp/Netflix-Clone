@@ -75,7 +75,7 @@ body {
   padding: 6.5px 16px;
 }
 
-button.language {
+.front-lang-drop {
   background-color: transparent;
   border: #616161 0.5px solid;
   font-size: 16px;
@@ -83,27 +83,71 @@ button.language {
   padding: 0;
 }
 
-button.language span {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
+.front-lang-drop {
+    position: relative;
+    z-index: 10;
 }
 
-button.language span svg,img {
-  vertical-align: middle;
+.front-lang-drop .select {
+    background-color: transparent;
+    color: white;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 3px 10px;
+    justify-content: center;
+    cursor: pointer;
 }
 
-button.language span svg {
-  height: 20px;
+.front-lang-drop .select svg {
+    height: 24px;
+    width: 24px;
 }
 
-button.language span img {
-  height: 5.8px;
-  width: 7.5px;
-  padding: 0;
+.front-lang-drop .select span {
+  padding: 0 5px 0 0;
+}
+
+.front-lang-drop .select:hover {
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.front-lang-drop .menu {
+  list-style: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
   margin: 0;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  display: none;
+  transition: 0.2s;
+  opacity: 0;
+  z-index: 20;
+}
+
+.menu li {
+  margin: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background-color: #232323;
+}
+
+.dropdown-active {
+  background-color: #232323;
+}
+
+.menu-open {
+  display: block;
+  opacity: 1;
 }
 
 .red.btn {

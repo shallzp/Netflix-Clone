@@ -3,12 +3,20 @@
     "title": "Netflix India – Watch TV Shows Online, Watch Movies Online",
     
 
-    "front-sign-in": {
-      "main": {
-        "front-nav": {
-          "front-btns": {
-            "language": "English",
-            "sign-in": "Sign In"
+    "#front-sign-in": {
+      ".main": {
+        ".front-nav": {
+          ".front-btns": {
+            ".front-lang-drop": {
+              ".select": {
+                ".selected": "English"
+              },
+              ".menu": {
+                ".en": "English",
+                ".hi": "Hindi"
+              }
+            },
+            ".sign-in": "Sign In"
           }
         },
         "hero": {
@@ -131,21 +139,21 @@
     },
 
 
-    "get-started": {},
+    "#get-started": {},
 
 
-    "sign-up": {},
+    "#sign-up": {},
 
 
-    "manage-profiles": {},
+    "#manage-profiles": {},
 
 
-    "home-page": {}
+    "#home-page": {}
   },
   "hi": {
     "title": "Netflix India – टीवी शो ऑनलाइन देखें, फिल्में ऑनलाइन देखें",
     
-    "front-sign-in": {
+    "#front-sign-in": {
       "main": {
         "front-nav": {
           "front-btns": {
@@ -273,15 +281,15 @@
     },
     
 
-    "get-started": {},
+    "#get-started": {},
 
 
-    "sign-up": {},
+    "#sign-up": {},
 
 
-    "manage-profiles": {},
+    "#manage-profiles": {},
 
 
-    "home-page": {}
+    "#home-page": {}
   }
 }
